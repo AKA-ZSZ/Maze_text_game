@@ -1,5 +1,5 @@
 from random import randrange
-from modules.player import Player
+from models.player import Player
 
 
 class Maze:
@@ -146,7 +146,7 @@ class Maze:
     def get_item(self):
         # T represents Treasure
         
-        self.player.pick_up_item("T")
+        self.player.pickup("T")
         print("\nGet a Treasure!")
         print(f"You have: ${self.player.backpack}.\n")
 
