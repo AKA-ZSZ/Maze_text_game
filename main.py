@@ -7,7 +7,7 @@ def main():
 
     fileDir = os.path.dirname(os.path.realpath('__file__'))
     filename = os.path.join(fileDir, "maze.txt")
-    maze1 = Maze(filename)
+    maze1 = Maze("maze.txt")
     maze1.display()
 
     while not maze1.is_exit(maze1.locations['P']):
@@ -58,26 +58,26 @@ def main():
         if player_location != maze1.locations['P']:  # the move happened
             # make the original location a whitespace
 
-            maze1.maze_lines[player_location[0]] = maze1.maze_lines[player_location[0]].replace("P", " ")
+            maze1.maze_lines[player_location[0]
+                             ] = maze1.maze_lines[player_location[0]].replace("P", " ")
 
             # replace the new location with P
-            new_line=''
-            count=0
+            new_line = ''
+            count = 0
             for char in maze1.maze_lines[maze1.locations['P'][0]]:
-                if count==maze1.locations['P'][1]:
-                    char="P"
-                new_line+=char
-                count+=1
+                if count == maze1.locations['P'][1]:
+                    char = "P"
+                new_line += char
+                count += 1
 
-            maze1.maze_lines[maze1.locations['P'][0]]=new_line
+            maze1.maze_lines[maze1.locations['P'][0]] = new_line
 
             # When getting a Treasure
-            if maze1.locations["P"]==maze1.locations["T"]:
+            if maze1.locations["P"] == maze1.locations["T"]:
                 maze1.get_item()
 
         print()
         maze1.display()
-
 
     print("\nYou Win!\n")
 

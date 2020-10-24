@@ -9,14 +9,14 @@ class Maze:
         self._items = ["P", "M", "T", "E"]
         self._locations = {
             "P": None,  # Player's location
-            "M": None,
-            "T": None,
+            "M": None,  # some item(?)
+            "T": None,  # some item(?)
             "E": None,  # Exit's location
         }
 
         # read a file
         with open(filename, "r") as f:
-            maze_lines = f.readlines()
+            maze_lines = f.read().splitlines() # no newline
 
             self._maze_lines = maze_lines
 
@@ -82,7 +82,7 @@ class Maze:
     def display(self):
         # traversing
         for line in self.maze_lines:
-            print(line.rstrip('\n'))
+            print(line)
 
     def find_random_spot(self):
         # generate 2 random numbers
@@ -145,11 +145,10 @@ class Maze:
 
     def get_item(self):
         # T represents Treasure
-        
+
         self.player.pick_up_item("T")
         print("\nGet a Treasure!")
         print(f"You have: ${self.player.backpack}.\n")
 
         # treasure is opened, avoid repetitive error
         self.locations["T"]=None
-            
