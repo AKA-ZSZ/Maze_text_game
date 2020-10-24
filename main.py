@@ -1,4 +1,4 @@
-from modules.maze import Maze
+from models.maze import Maze
 
 import os
 
