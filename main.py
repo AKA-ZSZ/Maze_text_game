@@ -7,7 +7,7 @@ def main():
 
     fileDir = os.path.dirname(os.path.realpath('__file__'))
     filename = os.path.join(fileDir, "maze.txt")
-    maze1 = Maze("maze.txt")
+    maze1 = Maze(filename)
     maze1.display()
 
     while not maze1.is_exit(maze1.locations['P']):
