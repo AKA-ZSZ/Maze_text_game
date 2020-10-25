@@ -131,3 +131,12 @@ dmypy.json
 .vscode/settings.json
 *.pyc
 *.pyc
+
+
+==
+.idea/Maze_text_game.iml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml

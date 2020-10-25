@@ -78,6 +78,7 @@ class Maze:
         return self._player
 
     # methods
+    
     def _load_all_from_file(self, filename=None):
         """ Loads maze from a txt file
 
@@ -102,8 +103,9 @@ class Maze:
                 for char in line:
                     new_line.append(char)
                 maze_lines.append(new_line)
+            self.structure=maze_lines
 
-        self._structure=maze_lines
+        
 
     def check_position(self, row, col):
         """True if the position is NOT an wall; otherwise False
