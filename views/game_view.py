@@ -22,6 +22,3 @@ class GameView:
             text += ("").join(line)
             text += "\n"
         return text
-
-maze = GameView([["P"," ","X","E","X"],[" "," "," "," ","X"]])
-print(maze._display_maze())
