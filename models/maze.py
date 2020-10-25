@@ -203,12 +203,17 @@ class Maze:
         return False
 
     def get_item(self):
-        # T represents Treasure
         
-        self.player.pickup("T")
-        print("\nGet a Treasure!")
-        print(f"You have: ${self.player.backpack}.\n")
+        player_current_location=(self.locations["p"][0]+self.movements_player[0],self.locations["p"][1]+self.movements_player[1])
+        items_not_p_e=["M", "T", "R","S","G"]
+        for item in items_not_p_e:
 
-        # treasure is opened, avoid repetitive error
-        self.locations["T"]=None
+            if player_current_location==self.locations[items_not_p_e]:
+                self.player.pickup(item)
+                print("\nGet an item!")
+                print(f"You have: {self.player.backpack}.\n")
+
+                # treasure is opened, avoid repetitive error
+                self.locations[item]=None
+                return
             
