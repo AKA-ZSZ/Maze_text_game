@@ -3,54 +3,67 @@ from models.player import Player
 
 
 class Maze:
-    def __init__(self, filename):
+    def __init__(self):
 
-        self._filename = filename
-        self._items = ["P", "M", "T", "E"]
+        self._structure=[[]]
+        # self._maze_height=len(self.structure)
+        # self._maze_width=len(self.structure[0])
+
+        # self._filename = filename
+        self._items = ["P", "M", "T", "R","S","G","E"]
         self._locations = {
             "P": None,  # Player's location
             "M": None,
             "T": None,
+            "R": None,
+            "S": None,
+            "G": None,
             "E": None,  # Exit's location
         }
 
-        # read a file
-        with open(filename, "r") as f:
-            maze_lines = f.readlines()
+        self._movements_player = [0,0]
 
-            self._maze_lines = maze_lines
-
-        self._maze_width = len(self._maze_lines[0].rstrip("\n"))
-        self._maze_height = len(self.maze_lines)
+        # GameController 
+        # self._maze_width = len(self._maze_lines[0].rstrip("\n"))
+        # self._maze_height = len(self.maze_lines)
 
         # add a player
         self._player = Player()
 
         # initialize the maze
-        self.initialize_game()
+        # self.initialize_game()
 
     # properties
-    @property
-    def filename(self):
-        return self._filename
+    # @property
+    # def filename(self):
+    #     return self._filename
 
     @property
-    def maze_lines(self):
+    def structure(self):
         # maze data getter
 
-        return self._maze_lines
+        return self._structure
 
-    @maze_lines.setter
-    def maze_lines(self, maze_lines):
-        self._maze_lines = maze_lines
+    @structure.setter
+    def structure(self, structure):
+        self._structure = structure
 
-    @property
-    def maze_width(self):
-        return self._maze_width
 
     @property
-    def maze_height(self):
-        return self._maze_height
+    def movements_player(self):
+        return self._movements_player
+
+    @movements_player.setter
+    def movements_player(self,movements_player):
+        self._movements_player=movements_player
+        
+    # @property
+    # def maze_width(self):
+    #     return self._maze_width
+
+    # @property
+    # def maze_height(self):
+    #     return self._maze_height
 
     @property
     def items(self):
@@ -65,8 +78,36 @@ class Maze:
         return self._player
 
     # methods
+    
+    def _load_all_from_file(self, filename=None):
+        """ Loads maze from a txt file
 
-    def can_move_to(self, row, col):
+        Args:
+            filename (str): filename to load students from
+
+        Raises:
+            Exception: if the file is missing, or we don't have access, or the CSV format is wrong
+        """
+
+        # Default filename
+        if not filename:
+            filename = 'maze.txt'
+
+        maze_lines = list()
+
+        with open(filename, "r") as f:
+            
+            for line in f.readlines():
+                line=line.rstrip('\n')
+                new_line=[]
+                for char in line:
+                    new_line.append(char)
+                maze_lines.append(new_line)
+            self.structure=maze_lines
+
+        
+
+    def check_position(self, row, col):
         """True if the position is NOT an wall; otherwise False
 
         Args:
@@ -75,28 +116,31 @@ class Maze:
         """
 
         # list_lines[row][col]==" " - True
-        if self.maze_lines[row][col] == "X":
+        if self.structure[row][col] == "X":
             return False
         return True
-
-    def display(self):
-        # traversing
-        for line in self.maze_lines:
-            print(line.rstrip('\n'))
+    
+    #View
+    # def display(self):
+    #     # traversing
+    #     for line in self.maze_lines:
+    #         print(line.rstrip('\n'))
 
     def find_random_spot(self):
         # generate 2 random numbers
         # 1. if it's not, run again until it's an empty space - while loop
-        # use check() to check if it's an empty space
+        # use check_position() to check if it's an empty space
         # the two numbers have min and max
         selected = False
+        
 
         while not selected:
             # use randint
-
-            spot_row = randrange(0, self.maze_height)
-            spot_col = randrange(0, self.maze_width)
-            if self.can_move_to(spot_row, spot_col):
+            maze_height=len(self.structure)
+            maze_width=len(self.structure[0])
+            spot_row = randrange(0, maze_height)
+            spot_col = randrange(0, maze_width)
+            if self.check_position(spot_row, spot_col):
                 selected=True
                 return (spot_row, spot_col)
 
@@ -106,29 +150,44 @@ class Maze:
             return True
         return False
 
-    def initialize_game(self):
+    def move_player(self, x, y):
+        maze_height=len(self.structure)
+        maze_width=len(self.structure[0])
+        new_player_location_x=self.locations["p"][0]+x
+        new_player_location_y=self.locations["p"][1]+y
 
-        # random select 4 empty spots
+        if self.check_position(new_player_location_x,new_player_location_y):
+            if 0<=new_player_location_x<maze_width and 0<=new_player_location_y<maze_height:
 
-        max_spots_len = len(self.items)
-        i = 0
-        while i < max_spots_len:
+                # update the movements
+                self.movements_player=[self.movements_player[0]+x,self.movements_player+y]
+        
+        
 
-            random_spot = self.find_random_spot()
+    # GameView - init_display()
+    # def initialize_game(self):
 
-            if self.can_move_to(random_spot[0], random_spot[1]):
-                if not self.is_item(random_spot[0], random_spot[1]):
-                    # track location
-                    self.locations[self.items[i]] = random_spot
+    #     # random select 4 empty spots
 
-                    # overwrite
+    #     max_spots_len = len(self.items)
+    #     i = 0
+    #     while i < max_spots_len:
 
-                    line_replaced = self.maze_lines[random_spot[0]]
-                    line_replaced = line_replaced[0:random_spot[1]] + \
-                        self.items[i]+line_replaced[(random_spot[1]+1):]
-                    self.maze_lines[random_spot[0]] = line_replaced
+    #         random_spot = self.find_random_spot()
 
-                    i += 1
+    #         if self.check_position(random_spot[0], random_spot[1]):
+    #             if not self.is_item(random_spot[0], random_spot[1]):
+    #                 # track location
+    #                 self.locations[self.items[i]] = random_spot
+
+    #                 # overwrite
+
+    #                 line_replaced = self.maze_lines[random_spot[0]]
+    #                 line_replaced = line_replaced[0:random_spot[1]] + \
+    #                     self.items[i]+line_replaced[(random_spot[1]+1):]
+    #                 self.maze_lines[random_spot[0]] = line_replaced
+
+    #                 i += 1
 
     def is_exit(self, location):
         """Check if the player is at the exit
