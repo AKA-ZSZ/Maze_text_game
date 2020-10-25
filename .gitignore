@@ -1,7 +1,8 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+__pycache__\
 *.py[cod]
 *$py.class
+modules/__pycache__/
 
 # C extensions
 *.so
@@ -127,3 +128,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.vscode/settings.json
+*.pyc
+*.pyc
+
+
+==
+.idea/Maze_text_game.iml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
