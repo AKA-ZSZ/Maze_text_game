@@ -145,7 +145,7 @@ class Maze:
                 return (spot_row, spot_col)
 
     def is_item(self, row, col):
-        item = self.maze_lines[row][col]
+        item = self.structure[row][col]
         if item != "X" and item != " ":
             return True
         return False

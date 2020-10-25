@@ -11,5 +11,13 @@ class GameController:
     def run(self):
         self._view.display_maze()
         self._view.display_move_options()
+
         while True:
             user_input=self._keyboard_controller.get_action()
+            # call self._maze.move_player to update the player's position
+
+            # refresh the game view
+
+            # return a result and raise SystemExit when the player is at the exit
+            
+
