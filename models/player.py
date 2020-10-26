@@ -11,6 +11,8 @@ class Player:
         return self._backpack
 
     def pickup(self,item):
+        if type(item)!=str:
+            raise TypeError
         if item not in self.backpack:
             self.backpack.append(item)
         

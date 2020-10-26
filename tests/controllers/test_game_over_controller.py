@@ -21,7 +21,7 @@ def test_display_win_message(capfd):
     
     out, err = capfd.readouterr()
 
-    assert out == "You won the game, Congratulations\ntype r to restart, q to quit the game\n"
+    assert out == "You won the game, Congratulations\n"
 
 
 def test_display_lose_message(capfd):
@@ -32,4 +32,4 @@ def test_display_lose_message(capfd):
     
     out, err = capfd.readouterr()
 
-    assert out == "you lost\ntype r to restart, q to quit the game\n"
+    assert out == "you lost\n"

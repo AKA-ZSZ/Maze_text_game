@@ -29,10 +29,14 @@ def test_pickup_arguments():
     """ 020E The pickup method should have 1 argument(TypeError otherwise)"""
     p=Player([])
     with pytest.raises(TypeError):
-        p.pickup(3)
+        p.pickup("s","h")
 
 def test_pickup_wrong_item_type():
     """ 020F The pickup method checks that the item is a string(TypeError otherwise)"""
+    p=Player([])
+    with pytest.raises(TypeError):
+        p.pickup(3)
+    
 
 def test_pickup_value():
     """ 020G The The pickup method checks that the picked item is added to the backpack"""
