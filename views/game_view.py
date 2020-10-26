@@ -2,8 +2,8 @@
 class GameView:
 
     def __init__(self,maze):
-        # if not isinstance(maze, List):
-        #     raise TypeError("Maze must be list")
+        if not isinstance(maze, object):
+            raise TypeError("Maze must be object")
 
         self._maze = maze
 
@@ -13,10 +13,11 @@ class GameView:
     def display_maze(self):
         print(self._display_maze())
 
-    def get_items(self, items):
-        print("Get an item!")
-        print(f"You have: {items}.\n")
+    def get_items(self,items):
+        print(self._get_items(items))
 
+    def _get_items(self, items):
+        return f"""Get an item!\nYou have: {items}.\n"""
 
     def _display_move_options(self):
         return "type w,a,s,d to move the player: "
