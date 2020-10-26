@@ -18,7 +18,7 @@ class KeyboardController:
         user_input=""
         
         while user_input not in input_list:
-            print('Please enter w/a/s/d:')
+            # print('Please enter w/a/s/d:')
             user_input=input()
 
         return user_input

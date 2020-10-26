@@ -14,7 +14,7 @@ class App:
         """ Call the classmethod to load all students from the CSV """
         self._maze = Maze()
         self._maze._load_all_from_file(filename)
-        self._maze_map=self._maze.structure
+       
 
     def run(self):
         """ This is the main method for our application.
@@ -28,18 +28,21 @@ class App:
 
         running = True
 
-        output_welcome = welcome_controller.run()
-        # Display the list of students, and get user input
+        welcome_controller.run()
+
         while running:
+            
+            game_controller = GameController(self._maze)
             # try:
-            #     output_welcome = welcome_controller.run()
+            #     result = game_controller.run()
             # except SystemExit:
             #     running = False
-            #     continue
+            result = game_controller.run()
 
-            # Display details about a student, and get user input
-            game_controller = GameController(self._maze_map)
-            try:
-                action = game_controller.run()
-            except SystemExit:
-                running = False
+            if result:
+                running=False
+
+        # result can be win or loss
+
+        game_over_controller=GameOverController(self._maze)
+        game_over_controller.run()

@@ -5,3 +5,6 @@ class WelcomeView(AbstractView):
 
     def _display_message(self):
         return "Welcome to our maze game!!"
+
+    def _display_instructions(self):
+        return "Press any to start the game"
