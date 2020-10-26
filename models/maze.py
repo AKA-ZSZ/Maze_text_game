@@ -5,7 +5,7 @@ from models.player import Player
 class Maze:
     def __init__(self):
 
-        self._structure = [[]]
+        self._structure = [[""]]
         # self._maze_height=len(self.structure)
         # self._maze_width=len(self.structure[0])
 
@@ -230,6 +230,7 @@ class Maze:
         i = 0
         while i < max_spots_len:
             random_spot = self.find_random_spot()
+            print(random_spot)
             if self.check_position(random_spot[0], random_spot[1]):
                 if not self.is_item(random_spot[0], random_spot[1]):
                     # record initial location
