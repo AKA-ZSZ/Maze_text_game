@@ -12,7 +12,7 @@ class GameController:
 
     def run(self):
         self._view.display_maze()
-        self._view.display_move_options()
+        # self._view.display_move_options()
 
         while not self._game_over:
             self._view.display_move_options()
