@@ -44,10 +44,10 @@ class GameController:
             "a": (0, -1),
             "d": (0, 1)
         }
-
         
+        # position will not change if user_input is not a recognized command
         shift = movement.get(user_input, (0, 0))
-        # if user_input in movement:
+        
         x = shift[0]
         y = shift[1]
         self._maze.move_player(x, y)

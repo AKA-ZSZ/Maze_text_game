@@ -21,6 +21,6 @@ def test_user_input(input_func, keyboard):
     assert keyboard.get_action() == "a"
 
 # @patch("builtins.input", side_effect = "f")
-# def test_input(keyboard):
-#     with pytest.raises(IndexError):
-#         patch.side_effect = "f"
+# def test_input(input_func, keyboard):
+#     print(keyboard.get_action())
+#     assert keyboard.get_action() == "f"
