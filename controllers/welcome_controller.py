@@ -6,7 +6,7 @@ class WelcomeController:
     def __init__(self):
         self._keyboard_controller=KeyboardController()
         self._view=WelcomeView()
-    
+
     def run(self):
         self._view.display_message()
         # while True:
@@ -14,4 +14,5 @@ class WelcomeController:
 
         #     if len(user_input):
         #         return True
+        self._view.display_instructions()
         user_input=self._keyboard_controller.get_action()
