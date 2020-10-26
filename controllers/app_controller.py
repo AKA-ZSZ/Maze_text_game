@@ -33,12 +33,16 @@ class App:
         while running:
             
             game_controller = GameController(self._maze)
-            try:
-                result = game_controller.run()
-            except SystemExit:
-                running = False
+            # try:
+            #     result = game_controller.run()
+            # except SystemExit:
+            #     running = False
+            result = game_controller.run()
+
+            if result:
+                running=False
 
         # result can be win or loss
 
-        # game_over_controller=GameOverController(result)
+        # game_over_controller=GameOverController()
         # game_over_controller.run()
