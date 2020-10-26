@@ -11,6 +11,13 @@ class AbstractView(ABC):
     def display_message(self):
         print(self._display_message())
 
+    def display_instructions(self):
+        print(self._display_instructions())
+
+    @abstractmethod
+    def _display_instructions(self):
+        pass
+
     @abstractmethod
     def _display_message(self):
         pass

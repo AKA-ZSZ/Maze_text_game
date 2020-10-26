@@ -4,7 +4,7 @@ from .abstract_view import AbstractView
 class GameOverView(AbstractView):
     """ Display the Game over view. Inherits from "AbstractView"
     """
-    
+
     def __init__(self, maze_result):
         """ initialize the game over view with one private attribite maze result
 
@@ -29,4 +29,5 @@ class GameOverView(AbstractView):
         elif self._maze_result == "lose":
             return "you lost"
 
-
+    def _display_instructions(self):
+        return "type r to restart, q to quit the game"

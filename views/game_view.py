@@ -10,14 +10,16 @@ class GameView:
     def display_move_options(self):
         print(self._display_move_options())
 
-    def _display_move_options(self):
-        return "type w,a,s,d to move the player: "
-
     def display_maze(self):
         print(self._display_maze())
 
-    def get_items(self):
-        self._maze.get_item()
+    def get_items(self, items):
+        print("Get an item!")
+        print(f"You have: {items}.\n")
+
+
+    def _display_move_options(self):
+        return "type w,a,s,d to move the player: "
 
     # _init_display
     def _display_maze(self):

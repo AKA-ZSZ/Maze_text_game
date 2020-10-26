@@ -149,10 +149,10 @@ class Maze:
     def move_player(self, x, y):
         maze_height = len(self.structure)
         maze_width = len(self.structure[0])
-        
+
         new_player_location_x = self.locations["P"][0]+self.movements_player[0]+x
         new_player_location_y = self.locations["P"][1]+self.movements_player[1]+y
-        
+
         if 0 <= new_player_location_x < maze_height and 0 <= new_player_location_y < maze_width:
             if self.check_position(new_player_location_x, new_player_location_y):
                 # change spot of the old location of player to empty spot
@@ -214,12 +214,15 @@ class Maze:
 
             if player_current_location == self.locations[item]:
                 self.player.pickup(item)
-                print("\nGet an item!")
-                print(f"You have: {self.player.backpack}.\n")
+                self.locations[item] = None
+                return True
+
+                # print("\nGet an item!")
+                # print(f"You have: {self.player.backpack}.\n")
 
                 # treasure is opened, avoid repetitive error
-                self.locations[item] = None
-                return
+
+                # return
 
     def generate_random_spots(self):
         # randomly select 5 spots, player and exit
