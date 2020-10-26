@@ -29,6 +29,7 @@ class App:
         running = True
 
         welcome_controller.run()
+        welcome_controller.get_input()
 
         while running:
             
