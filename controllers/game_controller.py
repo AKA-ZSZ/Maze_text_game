@@ -22,22 +22,27 @@ class GameController:
             if user_input == "w":
                 self._maze.move_player(-1, 0)
                 self._view.display_maze()
-                self._view.get_items()
+                if self._maze.get_item():
+                    self._view.get_items(self._maze.player.backpack)
+
 
             if user_input == "s":
                 self._maze.move_player(1, 0)
                 self._view.display_maze()
-                self._view.get_items()
+                if self._maze.get_item():
+                    self._view.get_items(self._maze.player.backpack)
 
             if user_input == "a":
                 self._maze.move_player(0, -1)
                 self._view.display_maze()
-                self._view.get_items()
+                if self._maze.get_item():
+                    self._view.get_items(self._maze.player.backpack)
 
             if user_input == "d":
                 self._maze.move_player(0, 1)
                 self._view.display_maze()
-                self._view.get_items()
+                if self._maze.get_item():
+                    self._view.get_items(self._maze.player.backpack)
 
             player_current_location = (
                 self._maze.locations["P"][0]+self._maze.movements_player[0], self._maze.locations["P"][1]+self._maze.movements_player[1])
