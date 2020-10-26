@@ -8,8 +8,6 @@ class GameOverController:
 
         self._maze_result=(len(self._maze.player.backpack)==5)
         self._view=GameOverView(self._maze_result)
-    
+
     def run(self):
         self._view.display_message()
-        self._view.display_instructions()
-        

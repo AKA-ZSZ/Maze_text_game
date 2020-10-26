@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class AbstractView(ABC):
     """ Template for views
 
-    Defines `_display_message as abstractmethods.
+    Defines `_display_message' and  'display_instructions' as abstractmethods.
 
     """
 
@@ -21,4 +21,3 @@ class AbstractView(ABC):
     @abstractmethod
     def _display_message(self):
         pass
-
