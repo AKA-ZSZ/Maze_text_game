@@ -16,8 +16,7 @@ class GameView:
     def display_maze(self):
         print(self._display_maze())
 
-    def refresh(self):
-        self.display_maze()
+    def get_items(self):
         self._maze.get_item()
 
     # _init_display
@@ -33,5 +32,5 @@ class GameView:
     #refresh the map every time game controller calls the view
     # def _refresh(self):
     #     pass
-        
+
 

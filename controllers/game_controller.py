@@ -8,7 +8,7 @@ class GameController:
         self._maze.generate_random_spots()
         self._view=GameView(maze)
         self._keyboard_controller=KeyboardController()
-        
+
     def run(self):
         self._view.display_maze()
         self._view.display_move_options()
@@ -17,45 +17,28 @@ class GameController:
             user_input=self._keyboard_controller.get_action()
             # print(user_input)
             if user_input == "w":
-                self._maze.move_player(-1, 0) 
-                # self._view = GameView(self._maze, self._maze._locations, self._maze.movements_player)
-                self._view=GameView(self._maze)
-                # self._view.display_maze()
-                
-                # print(self._maze.locations)
-                # print(self._maze.movements_player)
-                self._view.refresh()
+                self._maze.move_player(-1, 0)
+                self._view.display_maze()
+                self._view.get_items()
 
             if user_input == "s":
                 self._maze.move_player(1, 0)
-
-                self._view=GameView(self._maze)
-                
-                self._view.refresh()
+                self._view.display_maze()
+                self._view.get_items()
 
             if user_input == "a":
                 self._maze.move_player(0, -1)
+                self._view.display_maze()
+                self._view.get_items()
 
-                self._view=GameView(self._maze)
-                # self._view.display_maze()
-
-                # print(self._maze.locations)
-                # print(self._maze.movements_player)
-                self._view.refresh()
-                
             if user_input == "d":
                 self._maze.move_player(0, 1)
-                
-                self._view=GameView(self._maze)
-                # self._view.display_maze()
+                self._view.display_maze()
+                self._view.get_items()
 
-                # print(self._maze.locations)
-                # print(self._maze.movements_player)
-                self._view.refresh()
 
-            
             self._view.display_move_options()
 
-            
-            
+
+
 
