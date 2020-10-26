@@ -44,5 +44,5 @@ class App:
 
         # result can be win or loss
 
-        # game_over_controller=GameOverController()
-        # game_over_controller.run()
+        game_over_controller=GameOverController(self._maze)
+        game_over_controller.run()

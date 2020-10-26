@@ -14,7 +14,7 @@ class GameOverView(AbstractView):
         Raises:
             ValueError: maze result must be "win" or "lose"
         """
-        if maze_result != "win" and maze_result != "lose":
+        if type(maze_result)!=bool:
             raise ValueError("Game result must be win or lose")
         self._maze_result = maze_result
 
@@ -24,9 +24,9 @@ class GameOverView(AbstractView):
         Returns:
             str
         """
-        if self._maze_result == "win":
+        if self._maze_result:
             return "You won the game, Congratulations"
-        elif self._maze_result == "lose":
+        else:
             return "you lost"
 
     def _display_instructions(self):
