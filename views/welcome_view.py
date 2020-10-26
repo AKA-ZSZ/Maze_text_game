@@ -7,4 +7,4 @@ class WelcomeView(AbstractView):
         return "Welcome to our maze game!!"
 
     def _display_instructions(self):
-        return "Type s to start the game"
+        return "Press any to start the game"
