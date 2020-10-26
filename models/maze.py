@@ -230,7 +230,6 @@ class Maze:
         i = 0
         while i < max_spots_len:
             random_spot = self.find_random_spot()
-            print(random_spot)
             if self.check_position(random_spot[0], random_spot[1]):
                 if not self.is_item(random_spot[0], random_spot[1]):
                     # record initial location
