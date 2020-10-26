@@ -2,6 +2,7 @@ class Player:
     def __init__(self,backpack=[]):
         if type(backpack)!=list:
             raise TypeError
+        
         # [item1,item2...]
         self._backpack=backpack
 
@@ -12,7 +13,6 @@ class Player:
     def pickup(self,item):
         if item not in self.backpack:
             self.backpack.append(item)
-        # else:
-        #     self.backpack[item]+=1
+        
 
     

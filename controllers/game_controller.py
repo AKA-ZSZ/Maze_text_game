@@ -5,6 +5,7 @@ class GameController:
     def __init__(self, maze):
         self._maze = maze
         self._game_over = False
+        self._maze.generate_random_spots()
         self._view=GameView(maze)
         self._keyboard_controller=KeyboardController()
         
@@ -14,10 +15,47 @@ class GameController:
 
         while True:
             user_input=self._keyboard_controller.get_action()
-            # call self._maze.move_player to update the player's position
+            # print(user_input)
+            if user_input == "w":
+                self._maze.move_player(-1, 0) 
+                # self._view = GameView(self._maze, self._maze._locations, self._maze.movements_player)
+                self._view=GameView(self._maze)
+                # self._view.display_maze()
+                
+                # print(self._maze.locations)
+                # print(self._maze.movements_player)
+                self._view.refresh()
 
-            # refresh the game view
+            if user_input == "s":
+                self._maze.move_player(1, 0)
 
-            # return a result and raise SystemExit when the player is at the exit
+                self._view=GameView(self._maze)
+                
+                self._view.refresh()
+
+            if user_input == "a":
+                self._maze.move_player(0, -1)
+
+                self._view=GameView(self._maze)
+                # self._view.display_maze()
+
+                # print(self._maze.locations)
+                # print(self._maze.movements_player)
+                self._view.refresh()
+                
+            if user_input == "d":
+                self._maze.move_player(0, 1)
+                
+                self._view=GameView(self._maze)
+                # self._view.display_maze()
+
+                # print(self._maze.locations)
+                # print(self._maze.movements_player)
+                self._view.refresh()
+
+            
+            self._view.display_move_options()
+
+            
             
 
