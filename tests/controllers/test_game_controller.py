@@ -61,7 +61,7 @@ def test_move_right(game):
 
 
 def test_exit():
-    '''030E check player reaches the exit'''
+    '''040A check player reaches the exit'''
     maze=Maze()
     maze._load_all_from_file()
     game_controller=GameController(maze)
