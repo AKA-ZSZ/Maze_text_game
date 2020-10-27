@@ -5,10 +5,10 @@ from controllers.game_controller import GameController
 from controllers.game_over_controller import GameOverController
 
 class App:
-    
-
-    # def run(self):
-    #     pass
+    '''Main class for the application. It interacts with Maze model and three controllers:
+       WelcomeController
+       GameController
+       GameOverController'''
 
     def __init__(self, filename=None):
         """ Call the classmethod to load all students from the CSV """
@@ -29,14 +29,12 @@ class App:
         running = True
 
         welcome_controller.run()
+        welcome_controller.get_input()
 
         while running:
             
             game_controller = GameController(self._maze)
-            # try:
-            #     result = game_controller.run()
-            # except SystemExit:
-            #     running = False
+            
             result = game_controller.run()
 
             if result:
