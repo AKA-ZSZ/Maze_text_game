@@ -28,7 +28,7 @@ class Player:
         """Player can pick up items and put into backpack
 
         Args:
-            item (str): The
+            item (str): The items in the backpack
 
         Raises:
             TypeError: When the item argument is not str or the length of arguments is not 1
