@@ -28,4 +28,4 @@ def test_display_message(welcome, capfd):
     welcome.run()
     out, err = capfd.readouterr()
 
-    assert out == "Welcome to our maze game!!\nPress any to start the game\n"
+    assert out == "Welcome to our maze game!!\nPress w/a/s/d to start the game\n"

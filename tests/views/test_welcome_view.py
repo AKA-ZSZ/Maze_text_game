@@ -16,4 +16,4 @@ def test_display_message():
 def test_display_intructions():
     """ 030A test: display instructions prints correct instruction text"""
     maze = WelcomeView()
-    assert maze._display_instructions() == "Press any to start the game"
+    assert maze._display_instructions() == "Press w/a/s/d to start the game"

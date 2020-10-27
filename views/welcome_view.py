@@ -19,4 +19,4 @@ class WelcomeView(AbstractView):
         Returns:
             str: instruction message
         """
-        return "Press any to start the game"
+        return "Press w/a/s/d to start the game"

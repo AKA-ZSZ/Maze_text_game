@@ -5,7 +5,7 @@ class KeyboardController:
 
     def get_action(self):
         # a list of command that the game would recognize
-        input_list = ("w", "a", "s", "d", "q")
+        input_list = ("w", "a", "s", "d")
         user_input=""
         
         while user_input not in input_list:
