@@ -2,6 +2,7 @@ from views.game_over_view import GameOverView
 from .keyboard_controller import KeyboardController
 
 class GameOverController:
+    '''Call display_message() function from GameOverView to display game over messages'''
     def __init__(self,maze):
         self._maze=maze
 
