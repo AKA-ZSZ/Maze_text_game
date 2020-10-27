@@ -9,11 +9,8 @@ class KeyboardController:
         user_input=""
         
         while user_input not in input_list:
-            try:
-                user_input=input()
+            user_input=input()
 
-                # if the input is not recognized by the game, user need to enter another command
-                if user_input in input_list:
-                    return user_input
-            except IndexError():
-                continue
+            # if the input is not recognized by the game, user need to enter another command
+            if user_input in input_list:
+                return user_input
