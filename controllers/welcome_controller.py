@@ -3,6 +3,8 @@ from .keyboard_controller import KeyboardController
 
 
 class WelcomeController:
+    '''Call functions from WelcomeView to display welcome messages'''
+
     def __init__(self):
         self._keyboard_controller=KeyboardController()
         self._view=WelcomeView()

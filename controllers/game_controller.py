@@ -3,6 +3,10 @@ from .keyboard_controller import KeyboardController
 
 
 class GameController:
+    '''Call functions from GameView to display the maze. 
+       Call functions from Maze to get position of player, items, and exit
+       Set up how player will move based on "w,a,s,d" command'''
+
     def __init__(self, maze):
         self._maze = maze
         self._game_over = False
@@ -55,4 +59,3 @@ class GameController:
         if self._maze.get_item():
             self._view.get_items(self._maze.player.backpack)
     
-        
