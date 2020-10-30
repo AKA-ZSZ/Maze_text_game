@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, backpack=[]):
+    def __init__(self, backpack=None):
         """The Player class is to create a player in maze text game
 
         Args:
@@ -11,6 +11,9 @@ class Player:
         Raises:
             TypeError: when the backpack argument is not a list or or the length of arguments is not 1
         """
+        if backpack is None:
+            backpack = []
+
         if type(backpack) != list:
             raise TypeError
 
@@ -25,7 +28,7 @@ class Player:
         """Player can pick up items and put into backpack
 
         Args:
-            item (str): The 
+            item (str): The items in the backpack
 
         Raises:
             TypeError: When the item argument is not str or the length of arguments is not 1
