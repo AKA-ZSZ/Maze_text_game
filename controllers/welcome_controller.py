@@ -5,9 +5,9 @@ from .keyboard_controller import KeyboardController
 class WelcomeController:
     '''Call functions from WelcomeView to display welcome messages'''
 
-    def __init__(self):
+    def __init__(self,window):
         self._keyboard_controller=KeyboardController()
-        self._view=WelcomeView()
+        self._view=WelcomeView(window)
 
     def run(self):
         # call functions from WelcomeView to display messages
