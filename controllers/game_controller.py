@@ -22,29 +22,36 @@ class GameController:
         return (self._maze.locations["P"][0]+self._maze.movements_player[0], self._maze.locations["P"][1]+self._maze.movements_player[1])
 
     def run(self):
-        player_rol = self.player_current_location[0]
-        player_col = self.player_current_location[1]
-        keys = pygame.key.get_pressed()
-        if keys[pygame.locals.K_RIGHT]:
-            if player_col + 1 < self._maze.row and self._maze.check_position(player_rol, player_col + 1):
-                self.move_with_input("d")
-                self._maze.player.rect.x = min(
-                    self._maze.player.rect.x + GridSize.SIZE, self._maze.row * GridSize.SIZE - GridSize.SIZE)
-        elif keys[pygame.locals.K_LEFT]:
-            self.move_with_input("a")
-            if self._maze.check_position(player_rol, player_col - 1):
-                self.player.rect.x = max(
-                    self.player.rect.x - GridSize.SIZE, 0)
-        elif keys[pygame.locals.K_UP]:
-            if self._maze.check_position(player_rol - 1, player_col):
-                self.move_with_input("w")
-                self.player.rect.y = max(
-                    self.player.rect.y - GridSize.SIZE, 0)
-        elif keys[pygame.locals.K_DOWN]:
-            if player_rol + 1 < self._maze.col and self._maze.check_position(player_rol + 1, player_col):
-                self.move_with_input("s")
-                self.player.rect.y = min(
-                    self.player.rect.y + GridSize.SIZE, self._maze.col * GridSize.SIZE - GridSize.SIZE)
+        user_input = self._keyboard_controller.get_action()
+        
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.locals.K_RIGHT]:
+        #     if player_col + 1 < self._maze.row and self._maze.check_position(player_rol, player_col + 1):
+        #         self.move_with_input("d")
+        #         self._maze.player.rect.x = min(
+        #             self._maze.player.rect.x + GridSize.SIZE, self._maze.row * GridSize.SIZE - GridSize.SIZE)
+        # elif keys[pygame.locals.K_LEFT]:
+        #     self.move_with_input("a")
+        #     if self._maze.check_position(player_rol, player_col - 1):
+        #         self.player.rect.x = max(
+        #             self.player.rect.x - GridSize.SIZE, 0)
+        # elif keys[pygame.locals.K_UP]:
+        #     if self._maze.check_position(player_rol - 1, player_col):
+        #         self.move_with_input("w")
+        #         self.player.rect.y = max(
+        #             self.player.rect.y - GridSize.SIZE, 0)
+        # elif keys[pygame.locals.K_DOWN]:
+        #     if player_rol + 1 < self._maze.col and self._maze.check_position(player_rol + 1, player_col):
+        #         self.move_with_input("s")
+        #         self.player.rect.y = min(
+        #             self.player.rect.y + GridSize.SIZE, self._maze.col * GridSize.SIZE - GridSize.SIZE)
+        
+        if user_input in ("w","a","s","d"):
+            
+            self.move_with_input(user_input)
+                
+        elif user_input=="q":
+            pygame.quit()
 
         # # call display_maze() to display the maze
         # self._view.display_maze()
@@ -78,6 +85,14 @@ class GameController:
         x = shift[0]
         y = shift[1]
         self._maze.move_player(x, y)
+
+        # pygame - set new position in the window
+        player_row = self.player_current_location[0]
+        player_col = self.player_current_location[1]
+
+        self._maze.player.rect.x = player_col*GridSize.SIZE
+        self._maze.player.rect.y = player_row*GridSize.SIZE
+
         self._view.display_maze()
         if self._maze.get_item():
             self._view.get_items(self._maze.player.backpack)

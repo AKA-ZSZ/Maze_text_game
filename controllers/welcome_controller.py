@@ -19,4 +19,4 @@ class WelcomeController:
     
     def get_input(self):
         # get user input from KeyboardController
-        self._keyboard_controller.get_action()
+        return self._keyboard_controller.get_action()

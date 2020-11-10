@@ -22,7 +22,14 @@ class App:
         self._maze = Maze()
         self._maze._load_all_from_file(filename)
         self._maze.generate_random_spots()
+        self._window=pygame.display.set_mode(
+            (self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + 50))
 
+    @property
+    def window(self):
+        return self._window
+
+        
     def run(self):
         """ This is the main method for our application.
 
@@ -32,16 +39,15 @@ class App:
         """
         pygame.init()
         print(self._maze.locations)
-        window = pygame.display.set_mode(
-            (self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + 50))
+        # window = pygame.display.set_mode(
+        #     (self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + 50))
         clock = pygame.time.Clock()
 
-        
 
-        welcome_controller = WelcomeController(self._window)
-        
+        welcome_controller = WelcomeController(self.window)
+        # welcome_controller = WelcomeController(window)
 
-        running = True
+        running = False
 
         self._maze.create_player()
         self._maze.create_maze_exit()
@@ -49,12 +55,22 @@ class App:
         items = self._maze.create_items()
 
         welcome_controller.run()
-        # welcome_controller.get_input()
+        pygame.display.update()
+
+        start=False
+
+        while not start:
+            start_key=welcome_controller.get_input()
+            start=len(start_key)>0
+
+
+        running=True
+        
         score = 0
 
         while running:
             clock.tick(20)
-            window.fill((0, 0, 0))
+            self.window.fill((0, 0, 0))
 
             for event in pygame.event.get():
                 if event.type == pygame.locals.QUIT:
@@ -68,16 +84,16 @@ class App:
                 score += 1
 
             # move these to view?
-            window.blit(create_text_surface(
+            self.window.blit(create_text_surface(
                 f"Score: {score}"), (self._maze.row * GridSize.SIZE - GridSize.SIZE * 2, self._maze.col * GridSize.SIZE))
-            window.blit(create_text_surface(
+            self.window.blit(create_text_surface(
                 f"{pygame.time.get_ticks()} ms"), (0, self._maze.col * GridSize.SIZE))
 
             # move these to view?
-            window.blit(self._maze.player.image, self._maze.player.rect)
-            window.blit(self._maze.maze_exit.image, self._maze.maze_exit.rect)
-            wall.draw(window)
-            items.draw(window)
+            self.window.blit(self._maze.player.image, self._maze.player.rect)
+            self.window.blit(self._maze.maze_exit.image, self._maze.maze_exit.rect)
+            wall.draw(self.window)
+            items.draw(self.window)
 
             if pygame.sprite.collide_rect(self._maze.player, self._maze.maze_exit):
                 # game over controller will be in here

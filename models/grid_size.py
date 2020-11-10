@@ -1,3 +1,3 @@
 
 class GridSize:
-    SIZE = 50
+    SIZE = 100
