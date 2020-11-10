@@ -1,5 +1,11 @@
 from random import randrange
 from models.player import Player
+from models.wall import Wall
+from models.items import Items
+from models.maze_exit import MazeExit
+import pygame
+
+from models.grid_size import GridSize
 
 
 class Maze:
@@ -32,6 +38,24 @@ class Maze:
 
         # add a player
         self._player = Player()
+        # add maze exit
+        self._maze_exit = MazeExit()
+
+    @property
+    def row(self):
+        return len(self._structure[0])
+
+    @property
+    def col(self):
+        return len(self._structure)
+
+    @property
+    def maze_exit(self):
+        return self._maze_exit
+
+    @property
+    def player(self):
+        return self._player
 
     @property
     def structure(self):
@@ -58,11 +82,45 @@ class Maze:
     def locations(self):
         return self._locations
 
-    @property
-    def player(self):
+    def create_wall(self):
+        bricks = pygame.sprite.Group()
+        for height in range(self.col):
+            for width in range(self.row):
+
+                if not self.check_position(height, width):
+                    brick = Wall()
+                    brick.rect.x = width * GridSize.SIZE
+                    brick.rect.y = height * GridSize.SIZE
+
+                    bricks.add(brick)
+
+        return bricks
+    # methods
+
+    def create_player(self):
+
+        self._player.rect.x = self.locations.get("P")[1] * GridSize.SIZE
+        self._player.rect.y = self.locations.get("P")[0] * GridSize.SIZE
         return self._player
 
-    # methods
+    def create_maze_exit(self):
+        self._maze_exit.rect.x = self.locations.get("E")[1] * GridSize.SIZE
+        self._maze_exit.rect.y = self.locations.get("E")[0] * GridSize.SIZE
+        return self._maze_exit
+
+    def create_items(self):
+        items = pygame.sprite.Group()
+
+        for player_item in self.locations.keys():
+            if player_item in ["M", "T", "R", "S", "G"]:
+                maze_item = Items()
+                maze_item.rect.x = self.locations.get(
+                    player_item)[1] * GridSize.SIZE
+                maze_item.rect.y = self.locations.get(
+                    player_item)[0] * GridSize.SIZE
+
+                items.add(maze_item)
+        return items
 
     def _load_all_from_file(self, filename=None):
         """ Loads maze from a txt file
