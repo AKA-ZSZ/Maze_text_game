@@ -38,8 +38,8 @@ class WelcomeView(AbstractView):
         Returns:
             str: instruction message
         """
-        # return "Press w/a/s/d to start the game"
-        instruction="Press w/a/s/d to start the game"
+        # return "Press any key to start the game"
+        instruction="Press any key to start the game"
 
         ins_surface=self._arial.render(instruction,True,(0,0,0))
         ins_text=ins_surface.convert_alpha()

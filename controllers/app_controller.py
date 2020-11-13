@@ -57,11 +57,13 @@ class App:
         welcome_controller.run()
         pygame.display.update()
 
-        start=False
+        # start=False
 
-        while not start:
-            start_key=welcome_controller.get_input()
-            start=len(start_key)>0
+        # while not start:
+        #     start_key=welcome_controller.get_input()
+        #     start=(len(start_key)>0)
+        welcome_controller.get_input()
+        
 
 
         running=True
@@ -69,19 +71,22 @@ class App:
         score = 0
 
         while running:
+            pygame.display.update()
             clock.tick(20)
             self.window.fill((0, 0, 0))
 
-            for event in pygame.event.get():
-                if event.type == pygame.locals.QUIT:
-                    running = False
+            # for event in pygame.event.get():
+            #     if event.type == pygame.locals.QUIT:
+            #         running = False
 
             game_controller = GameController(self._maze, self._maze.player)
 
-            result = game_controller.run()
+            game_controller.run()
 
             if pygame.sprite.spritecollide(self._maze.player, items, dokill=True):
                 score += 1
+
+            
 
             # move these to view?
             self.window.blit(create_text_surface(
@@ -95,11 +100,15 @@ class App:
             wall.draw(self.window)
             items.draw(self.window)
 
+            
             if pygame.sprite.collide_rect(self._maze.player, self._maze.maze_exit):
                 # game over controller will be in here
+                # game_over_controller = GameOverController(self.window, self._maze)
+                # game_over_controller.run()
+
                 running = False
 
-            pygame.display.update()
+            
 
             #
 
@@ -108,8 +117,17 @@ class App:
 
         # result can be win or loss
 
-        # game_over_controller = GameOverController(self._maze)
+        # game_over_controller = GameOverController(self.window, self._maze)
         # game_over_controller.run()
+
+        # game over controller will be in here
+        game_over_controller = GameOverController(self.window, self._maze)
+        game_over_controller.run()
+        pygame.display.update()
+        while True:
+            key=game_over_controller.get_user_input()
+            if key=="q":
+                pygame.quit()
 
 # better to put this somewhere else
 

@@ -15,7 +15,7 @@ class WelcomeController:
         self._view.display_instructions()
 
         # get user input from KeyboardController
-        # user_input=self._keyboard_controller.get_action()
+        # user_input=self.get_input()
     
     def get_input(self):
         # get user input from KeyboardController
