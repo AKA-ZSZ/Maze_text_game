@@ -49,11 +49,6 @@ class App:
 
         running = False
 
-        self._maze.create_player()
-        self._maze.create_maze_exit()
-        wall = self._maze.create_wall()
-        items = self._maze.create_items()
-
         welcome_controller.run()
         pygame.display.update()
 
@@ -64,11 +59,15 @@ class App:
         #     start=(len(start_key)>0)
         welcome_controller.get_input()
         
-
-
         running=True
         
-        score = 0
+        # initialize pygame elements
+        self._maze.create_player()
+        self._maze.create_maze_exit()
+        self._maze.create_wall()
+        self._maze.create_items()
+
+        # score = 0
 
         while running:
             pygame.display.update()
@@ -79,26 +78,26 @@ class App:
             #     if event.type == pygame.locals.QUIT:
             #         running = False
 
-            game_controller = GameController(self._maze, self._maze.player)
+            game_controller = GameController(self._maze, self._window)
 
             game_controller.run()
 
-            if pygame.sprite.spritecollide(self._maze.player, items, dokill=True):
-                score += 1
+            # if pygame.sprite.spritecollide(self._maze.player, self._maze._maze_items, dokill=True):
+            #     self._maze._score += 1
 
             
 
-            # move these to view?
-            self.window.blit(create_text_surface(
-                f"Score: {score}"), (self._maze.row * GridSize.SIZE - GridSize.SIZE * 2, self._maze.col * GridSize.SIZE))
-            self.window.blit(create_text_surface(
-                f"{pygame.time.get_ticks()} ms"), (0, self._maze.col * GridSize.SIZE))
+            # # move these to view?
+            # self.window.blit(create_text_surface(
+            #     f"Score: {self._maze._score}"), (self._maze.row * GridSize.SIZE - GridSize.SIZE * 2, self._maze.col * GridSize.SIZE))
+            # self.window.blit(create_text_surface(
+            #     f"{pygame.time.get_ticks()} ms"), (0, self._maze.col * GridSize.SIZE))
 
-            # move these to view?
-            self.window.blit(self._maze.player.image, self._maze.player.rect)
-            self.window.blit(self._maze.maze_exit.image, self._maze.maze_exit.rect)
-            wall.draw(self.window)
-            items.draw(self.window)
+            # # move these to view?
+            # self.window.blit(self._maze.player.image, self._maze.player.rect)
+            # self.window.blit(self._maze.maze_exit.image, self._maze.maze_exit.rect)
+            # self._maze._wall.draw(self.window)
+            # self._maze._maze_items.draw(self.window)
 
             
             if pygame.sprite.collide_rect(self._maze.player, self._maze.maze_exit):
@@ -107,8 +106,6 @@ class App:
                 # game_over_controller.run()
 
                 running = False
-
-            
 
             #
 
@@ -132,8 +129,8 @@ class App:
 # better to put this somewhere else
 
 
-def create_text_surface(text):
-    openSans = pygame.font.SysFont('open sans', 24)
-    text_surface = openSans.render(text, True, (160, 0, 0))
+# def create_text_surface(text):
+#     openSans = pygame.font.SysFont('open sans', 24)
+#     text_surface = openSans.render(text, True, (160, 0, 0))
 
-    return text_surface
+#     return text_surface

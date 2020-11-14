@@ -41,6 +41,10 @@ class Maze:
         # add maze exit
         self._maze_exit = MazeExit()
 
+        self._wall=pygame.sprite.Group()
+        self._maze_items=pygame.sprite.Group()
+
+        self._score=0
     @property
     def row(self):
         return len(self._structure[0])
@@ -83,7 +87,7 @@ class Maze:
         return self._locations
 
     def create_wall(self):
-        bricks = pygame.sprite.Group()
+        # bricks = pygame.sprite.Group()
         for height in range(self.col):
             for width in range(self.row):
 
@@ -92,9 +96,10 @@ class Maze:
                     brick.rect.x = width * GridSize.SIZE
                     brick.rect.y = height * GridSize.SIZE
 
-                    bricks.add(brick)
+                    # bricks.add(brick)
+                    self._wall.add(brick)
 
-        return bricks
+        # return bricks
     # methods
 
     def create_player(self):
@@ -109,7 +114,7 @@ class Maze:
         return self._maze_exit
 
     def create_items(self):
-        items = pygame.sprite.Group()
+        # items = pygame.sprite.Group()
 
         for player_item in self.locations.keys():
             if player_item in ["M", "T", "R", "S", "G"]:
@@ -119,8 +124,8 @@ class Maze:
                 maze_item.rect.y = self.locations.get(
                     player_item)[0] * GridSize.SIZE
 
-                items.add(maze_item)
-        return items
+                self._maze_items.add(maze_item)
+        # return items
 
     def _load_all_from_file(self, filename=None):
         """ Loads maze from a txt file
