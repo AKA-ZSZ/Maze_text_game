@@ -5,6 +5,12 @@ import pygame
 class GameOverController:
     '''Call display_message() function from GameOverView to display game over messages'''
     def __init__(self, window, maze):
+        """Constructor for GameOverController. 
+
+        Args:
+            window (pygame.Surface): display the pygame window
+            maze (Maze): an instance of the Maze class
+        """
         self._maze=maze
         self._keyboard_controller=KeyboardController()
 
@@ -13,6 +19,7 @@ class GameOverController:
         self._view=GameOverView(window, self._maze_result, maze)
 
     def run(self):
+        """Method to call functions from view to display messages"""
         # call functions from WelcomeView to display messages
         
         self._view.display_message()
@@ -30,5 +37,10 @@ class GameOverController:
         #             running = False
 
     def get_user_input(self):
+        """Method to get user input from keyboard_controller and return it
+
+        Returns:
+            str: key pressed by user
+        """
         user_input = self._keyboard_controller.get_action()
         return user_input

@@ -27,6 +27,7 @@ class App:
 
     @property
     def window(self):
+        """Getter for the game window"""
         return self._window
 
         

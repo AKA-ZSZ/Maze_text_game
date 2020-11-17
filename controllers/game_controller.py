@@ -11,6 +11,12 @@ class GameController:
        Set up how player will move based on "w,a,s,d" command'''
 
     def __init__(self, maze, window):
+        """Constructor for GameController class
+
+        Args:
+            maze (Maze): instance of the Maze class
+            window (pygame.Surface): display the pygame surface
+        """
         self._maze = maze
         # self.player = player
         self._game_over = False
@@ -19,10 +25,17 @@ class GameController:
         
     @property
     def player_current_location(self):
+        """Getter for player's current location
+
+        Returns:
+            (tuple): current location of the player
+        """
         return (self._maze.locations["P"][0]+self._maze.movements_player[0], self._maze.locations["P"][1]+self._maze.movements_player[1])
 
     def run(self):
-        
+        """This is the main function that calls the methods that control the game based on user's input (w,a,s,d,q)
+            The pygame window closes when user presses 'q'.
+        """
         user_input = self._keyboard_controller.get_action()
         
         # keys = pygame.key.get_pressed()
@@ -75,6 +88,12 @@ class GameController:
         # return self._game_over
 
     def move_with_input(self, user_input):
+        """Gets user input from KeyboardController, matches it with the movement dict
+            and updates the player position accordingly.
+
+        Args:
+            user_input (str): key pressed by the user
+        """
         movement = {
             "w": (-1, 0),
             "s": (1, 0),

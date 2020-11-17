@@ -7,6 +7,11 @@ class KeyboardController:
 
 
     def get_action(self):
+        """Method to get user input
+
+        Returns:
+            str: key presssed by the user
+        """
         # # a list of command that the game would recognize
         # input_list = ("w", "a", "s", "d")
         # user_input=""
