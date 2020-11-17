@@ -16,7 +16,7 @@ class GameController:
         self._game_over = False
         self._view = GameView(maze)
         self._keyboard_controller = KeyboardController()
-
+        
     @property
     def player_current_location(self):
         return (self._maze.locations["P"][0]+self._maze.movements_player[0], self._maze.locations["P"][1]+self._maze.movements_player[1])
