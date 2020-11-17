@@ -24,3 +24,5 @@ class KeyboardController:
                 if event.type==pygame.locals.KEYDOWN:
                     # print(pygame.key.name(event.key))
                     return pygame.key.name(event.key)
+                elif event.type == pygame.locals.QUIT:
+                    pygame.quit()

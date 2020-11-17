@@ -5,7 +5,7 @@ class GameOverView(AbstractView):
     """ Display the Game over view. Inherits from "AbstractView"
     """
 
-    def __init__(self, window, maze_result):
+    def __init__(self, window, maze_result, maze):
         """ initialize private attribute maze result
 
         Args:
@@ -18,6 +18,7 @@ class GameOverView(AbstractView):
         if type(maze_result) != bool:
             raise ValueError("Game result must be win or lose")
         self._maze_result = maze_result
+        self._maze = maze
 
         self._window = window
         self._window.fill((255, 255, 255))
@@ -39,9 +40,9 @@ class GameOverView(AbstractView):
         """
 
         if self._maze_result:
-            msg = "You won the game, Congratulations, press 'q' to quit"
+            msg = f"You won the game, your score is: {self._maze._score}. Congratulations, press 'q' to quit"
         else:
-            msg = "you lost, press 'q' to quit"
+            msg = f"You lost, your score is: {self._maze._score}. Press 'q' to quit"
 
         msg_surface=self._arial.render(msg,True,(0,0,0))
         msg_text=msg_surface.convert_alpha()

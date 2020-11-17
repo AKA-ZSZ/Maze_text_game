@@ -10,11 +10,11 @@ class GameController:
        Call functions from Maze to get position of player, items, and exit
        Set up how player will move based on "w,a,s,d" command'''
 
-    def __init__(self, maze, player):
+    def __init__(self, maze, window):
         self._maze = maze
-        self.player = player
+        # self.player = player
         self._game_over = False
-        self._view = GameView(maze)
+        self._view = GameView(maze,window)
         self._keyboard_controller = KeyboardController()
         
     @property
@@ -22,6 +22,7 @@ class GameController:
         return (self._maze.locations["P"][0]+self._maze.movements_player[0], self._maze.locations["P"][1]+self._maze.movements_player[1])
 
     def run(self):
+        
         user_input = self._keyboard_controller.get_action()
         
         # keys = pygame.key.get_pressed()
@@ -52,6 +53,8 @@ class GameController:
                 
         elif user_input=="q":
             pygame.quit()
+
+        self._view.display_maze()
 
         # # call display_maze() to display the maze
         # self._view.display_maze()
