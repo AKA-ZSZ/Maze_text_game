@@ -44,6 +44,7 @@ class Maze:
         self._wall=pygame.sprite.Group()
         self._maze_items=pygame.sprite.Group()
 
+        self._time_left=30.00 # in seconds
         self._score=0
     @property
     def row(self):
