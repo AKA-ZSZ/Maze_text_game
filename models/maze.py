@@ -286,7 +286,7 @@ class Maze:
 
     #calculate the final score when user wins
     def cal_final_score(self):
-        return self._time_left*self._score
+        return float("{:.2f}".format(self._time_left*self._score))
 
     #ask winner for name in console and send a request
     def add_name_score(self):
