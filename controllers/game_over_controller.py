@@ -32,3 +32,5 @@ class GameOverController:
     def get_user_input(self):
         user_input = self._keyboard_controller.get_action()
         return user_input
+
+    

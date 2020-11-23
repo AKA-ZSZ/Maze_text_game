@@ -129,10 +129,17 @@ class App:
         game_over_controller = GameOverController(self.window, self._maze)
         game_over_controller.run()
         pygame.display.update()
+
+        if game_over_controller._maze_result:
+            self._maze.add_name_score()
+
         while True:
             key=game_over_controller.get_user_input()
             if key=="q":
                 pygame.quit()
+
+        
+
 
 # better to put this somewhere else
 
