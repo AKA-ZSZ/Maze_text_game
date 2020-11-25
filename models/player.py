@@ -3,7 +3,7 @@ import os
 
 from models.grid_size import GridSize
 
-FILE_PATH = os.path.join(os.path.dirname(__file__), "is.png")
+FILE_PATH = os.path.join(os.path.dirname(__file__), "images/is.png")
 
 
 class Player(pygame.sprite.Sprite):

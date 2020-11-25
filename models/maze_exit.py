@@ -2,7 +2,7 @@ import pygame
 import os
 from models.grid_size import GridSize
 
-FILE_PATH = os.path.join(os.path.dirname(__file__), "door.png")
+FILE_PATH = os.path.join(os.path.dirname(__file__), "images/door.png")
 
 
 class MazeExit(pygame.sprite.Sprite):
