@@ -25,8 +25,8 @@ class GameController:
         
         user_input = self._keyboard_controller.get_action()
         
-        if user_input in ("w","a","s","d"):
-            
+        # if user_input in ("w","a","s","d"):
+        if user_input in ("up","left","down","right"):
             self.move_with_input(user_input)
                 
         elif user_input=="q":
@@ -53,11 +53,17 @@ class GameController:
         # return self._game_over
 
     def move_with_input(self, user_input):
+        # movement = {
+        #     "w": (-1, 0),
+        #     "s": (1, 0),
+        #     "a": (0, -1),
+        #     "d": (0, 1)
+        # }
         movement = {
-            "w": (-1, 0),
-            "s": (1, 0),
-            "a": (0, -1),
-            "d": (0, 1)
+            "up": (-1, 0),
+            "down": (1, 0),
+            "left": (0, -1),
+            "right": (0, 1)
         }
 
         # position will not change if user_input is not a recognized command
