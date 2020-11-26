@@ -5,6 +5,9 @@ from models.items import Items
 from models.maze_exit import MazeExit
 import pygame
 
+import requests
+
+
 from models.grid_size import GridSize
 
 
@@ -23,12 +26,12 @@ class Maze:
         """
 
         self._structure = [[""]]
-        self._items = ["P", "M", "T", "R", "S", "G", "E"]
+        self._items = ["P", "B", "K", "H", "S", "G", "E"]
         self._locations = {
             "P": None,  # Player's location
-            "M": None,
-            "T": None,
-            "R": None,
+            "B": None,
+            "K": None,
+            "H": None,
             "S": None,
             "G": None,
             "E": None,  # Exit's location
@@ -41,10 +44,20 @@ class Maze:
         # add maze exit
         self._maze_exit = MazeExit()
 
-        self._wall=pygame.sprite.Group()
-        self._maze_items=pygame.sprite.Group()
+        self._wall = pygame.sprite.Group()
+        self._maze_items = pygame.sprite.Group()
 
+        self._score = 0
+
+        self._time_left=30.00 # in seconds
         self._score=0
+
+
+        # flask
+        self._API_URL= "http://localhost:5000/api"
+        self._scores = list()
+
+
     @property
     def row(self):
         return len(self._structure[0])
@@ -86,6 +99,26 @@ class Maze:
     def locations(self):
         return self._locations
 
+
+    @property
+    def scores(self):
+        
+        new_scores=[]
+        for score in sorted(self._scores,reverse=True):
+            new_dict=dict()
+            new_dict["name"]=score[0]
+            new_dict["score"]=score[1]
+            new_scores.append(new_dict)
+        return new_scores
+
+    def add_score(self, score):
+        # if type(score) is not Score:
+        #     raise TypeError("Invalid score.")
+
+        self._scores.append(score)
+
+
+
     def create_wall(self):
         """Method to place the wall object at a postion that is not "X".
             Uses the check_position() function to verify the position to place the wall.
@@ -126,19 +159,14 @@ class Maze:
         return self._maze_exit
 
     def create_items(self):
-        """Method to create items"""
-        # items = pygame.sprite.Group()
+        items = Items()
+        for player_item in ["B", "K", "H", "S", "G"]:
+            items.image_sprites.get(player_item).rect.x = self.locations.get(
+                player_item)[1] * GridSize.SIZE
+            items.image_sprites.get(player_item).rect.y = self.locations.get(
+                player_item)[0] * GridSize.SIZE
 
-        for player_item in self.locations.keys():
-            if player_item in ["M", "T", "R", "S", "G"]:
-                maze_item = Items()
-                maze_item.rect.x = self.locations.get(
-                    player_item)[1] * GridSize.SIZE
-                maze_item.rect.y = self.locations.get(
-                    player_item)[0] * GridSize.SIZE
-
-                self._maze_items.add(maze_item)
-        # return items
+            self._maze_items.add(items.image_sprites.get(player_item))
 
     def _load_all_from_file(self, filename=None):
         """ Loads maze from a txt file
@@ -265,7 +293,7 @@ class Maze:
         """
         player_current_location = (
             self.locations["P"][0]+self.movements_player[0], self.locations["P"][1]+self.movements_player[1])
-        items_not_p_e = ["M", "T", "R", "S", "G"]
+        items_not_p_e = ["B", "K", "H", "S", "G"]
         for item in items_not_p_e:
 
             if player_current_location == self.locations[item]:
@@ -290,3 +318,24 @@ class Maze:
                                    ][random_spot[1]] = self.items[i]
 
                     i += 1
+
+    #calculate the final score when user wins
+    def cal_final_score(self):
+        return float("{:.2f}".format(self._time_left*self._score))
+
+    #ask winner for name in console and send a request
+    def add_name_score(self):
+        winner_name=input('Please enter your name:')
+        req=requests.put(f"{self._API_URL}/new", json={"name": winner_name, "score": self.cal_final_score()})
+
+    # print all scores on {self._API_URL}/list
+    def print_scores(self):
+        data = requests.get(f"{self._API_URL}/list").json()
+        output = "\n".join(
+            [f"{score['name']}: {score['score']}" for score in data["scores"]]
+        )
+        print(output)
+
+    
+
+

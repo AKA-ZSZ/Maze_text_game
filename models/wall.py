@@ -3,7 +3,7 @@ import os
 
 from models.grid_size import GridSize
 
-FILE_PATH = os.path.join(os.path.dirname(__file__), "brick.png")
+FILE_PATH = os.path.join(os.path.dirname(__file__), "images/brick.png")
 
 
 class Wall(pygame.sprite.Sprite):
