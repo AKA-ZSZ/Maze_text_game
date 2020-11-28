@@ -1,22 +1,38 @@
 from views.welcome_view import WelcomeView
 from .keyboard_controller import KeyboardController
+import pygame
 
 
 class WelcomeController:
     '''Call functions from WelcomeView to display welcome messages'''
 
-    def __init__(self,window):
-        self._keyboard_controller=KeyboardController()
-        self._view=WelcomeView(window)
+    def __init__(self, window, width, height, grid_size):
+        self._keyboard_controller = KeyboardController()
+        self._view = WelcomeView(window)
+        self._width = width
+        self._height = height
+        self.grid_size = grid_size
 
     def run(self):
         # call functions from WelcomeView to display messages
         self._view.display_message()
-        self._view.display_instructions()
+        self._view.display_instructions(
+            self._width, self._height, self.grid_size)
 
         # get user input from KeyboardController
         # user_input=self.get_input()
-    
+
     def get_input(self):
         # get user input from KeyboardController
-        return self._keyboard_controller.get_action()
+        # return self._keyboard_controller.get_action()
+        text_field_width = self._width / 2 - self.grid_size
+        text_field_height = self._height/2 + 50
+        start_game = False
+        while not start_game:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if (text_field_width) < pygame.mouse.get_pos()[0] < (text_field_width + 100) and (text_field_height) < pygame.mouse.get_pos()[1] < (text_field_height + 30):
+                        print("Quit the game")
+                        pygame.quit()
+                    elif (text_field_width) < pygame.mouse.get_pos()[0] < (text_field_width + 100) and (text_field_height - 50) < pygame.mouse.get_pos()[1] < (text_field_height - 20):
+                        start_game = True

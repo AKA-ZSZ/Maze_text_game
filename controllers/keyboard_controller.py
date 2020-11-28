@@ -1,16 +1,16 @@
 import pygame
 import pygame.locals
 
+
 class KeyboardController:
     def __init__(self):
         pass
-
 
     def get_action(self):
         # # a list of command that the game would recognize
         # input_list = ("w", "a", "s", "d")
         # user_input=""
-        
+
         # while user_input not in input_list:
         #     user_input=input()
 
@@ -18,11 +18,14 @@ class KeyboardController:
         #     if user_input in input_list:
         #         return user_input
 
-        
         while True:
             for event in pygame.event.get():
-                if event.type==pygame.locals.KEYDOWN:
+                if event.type == pygame.locals.KEYDOWN:
                     # print(pygame.key.name(event.key))
                     return pygame.key.name(event.key)
                 elif event.type == pygame.locals.QUIT:
                     pygame.quit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if (190, 0) < pygame.mouse.get_pos() < (200, 10):
+                        print("Quit the game")
+                        pygame.quit()

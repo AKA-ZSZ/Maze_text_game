@@ -23,7 +23,7 @@ class App:
         self._maze._load_all_from_file(filename)
         self._maze.generate_random_spots()
         self._window = pygame.display.set_mode(
-            (self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + 50))
+            (self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + GridSize.SIZE))
 
     @property
     def window(self):
@@ -42,7 +42,8 @@ class App:
         #     (self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + 50))
         clock = pygame.time.Clock()
 
-        welcome_controller = WelcomeController(self.window)
+        welcome_controller = WelcomeController(
+            self.window, self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + GridSize.SIZE, 50)
         # welcome_controller = WelcomeController(window)
 
         running = False
