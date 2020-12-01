@@ -47,27 +47,27 @@ class App:
         # welcome_controller = WelcomeController(window)
 
         running = False
-        
+
         welcome_controller.run()
         pygame.display.update()
 
-        start=False
+        # start = False
 
         # while not start:
         #     start_key=welcome_controller.get_input()
         #     start=(len(start_key)>0)
 
-        while not start:
-            key=welcome_controller.get_input()
-            if key=="q":
-                pygame.quit()
-            elif key is not None:
-                start=True
-                
-        # welcome_controller.get_input()
-        
-        running=True
-        
+        # while not start:
+        #     key=welcome_controller.get_input()
+        #     if key=="q":
+        #         pygame.quit()
+        #     elif key is not None:
+        #         start=True
+
+        welcome_controller.get_input()
+
+        running = True
+
         # initialize pygame elements
         self._maze.create_player()
         self._maze.create_maze_exit()
@@ -136,8 +136,6 @@ class App:
             key = game_over_controller.get_user_input()
             if key == "q":
                 pygame.quit()
-
-        
 
 
 # better to put this somewhere else
