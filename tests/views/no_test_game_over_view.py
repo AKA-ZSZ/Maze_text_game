@@ -1,6 +1,7 @@
 from views.game_over_view import GameOverView
 import pytest
 
+
 @pytest.fixture
 def game_over_instance():
     maze = GameOverView(True)
@@ -17,7 +18,7 @@ def test_init_arguments():
     with pytest.raises(TypeError):
         maze = GameOverView()
     with pytest.raises(TypeError):
-        maze1 = GameOverView("win","lose")
+        maze1 = GameOverView("win", "lose")
 
 
 def test_init_maze():
