@@ -89,7 +89,7 @@ class App:
 
             game_controller.run()
 
-            if game_controller._view._maze._time_left <= 0:
+            if self._maze._time_left <= 0:
                 running = False
 
             # if pygame.sprite.spritecollide(self._maze.player, self._maze._maze_items, dokill=True):
