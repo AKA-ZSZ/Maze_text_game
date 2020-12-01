@@ -47,19 +47,27 @@ class App:
         # welcome_controller = WelcomeController(window)
 
         running = False
-
+        
         welcome_controller.run()
         pygame.display.update()
 
-        # start=False
+        start=False
 
         # while not start:
         #     start_key=welcome_controller.get_input()
         #     start=(len(start_key)>0)
-        welcome_controller.get_input()
 
-        running = True
-
+        while not start:
+            key=welcome_controller.get_input()
+            if key=="q":
+                pygame.quit()
+            elif key is not None:
+                start=True
+                
+        # welcome_controller.get_input()
+        
+        running=True
+        
         # initialize pygame elements
         self._maze.create_player()
         self._maze.create_maze_exit()
@@ -80,6 +88,9 @@ class App:
             game_controller = GameController(self._maze, self._window)
 
             game_controller.run()
+
+            if game_controller._view._maze._time_left <= 0:
+                running = False
 
             # if pygame.sprite.spritecollide(self._maze.player, self._maze._maze_items, dokill=True):
             #     self._maze._score += 1
@@ -117,10 +128,17 @@ class App:
         game_over_controller = GameOverController(self.window, self._maze)
         game_over_controller.run()
         pygame.display.update()
+
+        if game_over_controller._maze_result:
+            self._maze.add_name_score()
+
         while True:
             key = game_over_controller.get_user_input()
             if key == "q":
                 pygame.quit()
+
+        
+
 
 # better to put this somewhere else
 

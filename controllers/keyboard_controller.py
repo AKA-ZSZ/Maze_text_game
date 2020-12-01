@@ -18,14 +18,17 @@ class KeyboardController:
         #     if user_input in input_list:
         #         return user_input
 
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.locals.KEYDOWN:
-                    # print(pygame.key.name(event.key))
-                    return pygame.key.name(event.key)
-                elif event.type == pygame.locals.QUIT:
-                    pygame.quit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if (190, 0) < pygame.mouse.get_pos() < (200, 10):
-                        print("Quit the game")
-                        pygame.quit()
+        # while True:
+        #     for event in pygame.event.get():
+        #         if event.type==pygame.locals.KEYDOWN:
+        #             # print(pygame.key.name(event.key))
+        #             return pygame.key.name(event.key)
+        #         elif event.type == pygame.locals.QUIT:
+        #             pygame.quit()
+
+        for event in pygame.event.get():
+            if event.type == pygame.locals.KEYDOWN:
+                # print(pygame.key.name(event.key))
+                return pygame.key.name(event.key)
+            elif event.type == pygame.locals.QUIT:
+                pygame.quit()

@@ -5,6 +5,9 @@ from models.items import Items
 from models.maze_exit import MazeExit
 import pygame
 
+import requests
+
+
 from models.grid_size import GridSize
 
 
@@ -46,6 +49,15 @@ class Maze:
 
         self._score = 0
 
+        self._time_left=30.00 # in seconds
+        self._score=0
+
+
+        # flask
+        self._API_URL= "http://localhost:5000/api"
+        self._scores = list()
+
+
     @property
     def row(self):
         return len(self._structure[0])
@@ -86,6 +98,26 @@ class Maze:
     @property
     def locations(self):
         return self._locations
+
+
+    @property
+    def scores(self):
+        
+        new_scores=[]
+        for score in sorted(self._scores,reverse=True):
+            new_dict=dict()
+            new_dict["name"]=score[0]
+            new_dict["score"]=score[1]
+            new_scores.append(new_dict)
+        return new_scores
+
+    def add_score(self, score):
+        # if type(score) is not Score:
+        #     raise TypeError("Invalid score.")
+
+        self._scores.append(score)
+
+
 
     def create_wall(self):
         # bricks = pygame.sprite.Group()
@@ -249,3 +281,24 @@ class Maze:
                                    ][random_spot[1]] = self.items[i]
 
                     i += 1
+
+    #calculate the final score when user wins
+    def cal_final_score(self):
+        return float("{:.2f}".format(self._time_left*self._score))
+
+    #ask winner for name in console and send a request
+    def add_name_score(self):
+        winner_name=input('Please enter your name:')
+        req=requests.put(f"{self._API_URL}/new", json={"name": winner_name, "score": self.cal_final_score()})
+
+    # print all scores on {self._API_URL}/list
+    def print_scores(self):
+        data = requests.get(f"{self._API_URL}/list").json()
+        output = "\n".join(
+            [f"{score['name']}: {score['score']}" for score in data["scores"]]
+        )
+        print(output)
+
+    
+
+
