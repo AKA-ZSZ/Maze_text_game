@@ -20,19 +20,19 @@ def list_all_scores():
 def add_new_score():
     data = request.get_json()
     if data is None:
-        return "Empty data.",400
+        return "Empty data.", 400
 
-    if len(data)!=2:
+    if len(data) != 2:
         return "Invalid keys.", 400
 
-    try:
-        score = [data["name"], data["score"]]
-    except ValueError:
+    if type(data["name"]) != str or type(data["score"]) != float:
         return "Invalid data provided.", 400
-    else:
-        maze.add_score(score)
+    
+    score = [data["name"], data["score"]]
+    
+    maze.add_score(score)
 
-    return "",204
+    return "", 204
 
 if __name__ == "__main__":
     app.run(debug=True)
