@@ -15,7 +15,7 @@ class GameOverController:
         self._keyboard_controller=KeyboardController()
 
         # player must have 5 items in backpack to win
-        self._maze_result=(len(self._maze.player.backpack)==5)
+        self._maze_result=(len(self._maze.player.backpack)==5 and self._maze._time_left > 0)
         self._view=GameOverView(window, self._maze_result, maze)
 
     def run(self):

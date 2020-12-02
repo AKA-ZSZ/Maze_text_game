@@ -13,10 +13,9 @@ class AbstractView(ABC):
         # print(self._display_message())
         self._display_message()
 
-    def display_instructions(self):
-        """Method to display instructions on how to play the game"""
+    def display_instructions(self, *args, **kargs):
         # print(self._display_instructions())
-        self._display_instructions()
+        self._display_instructions(*args, **kargs)
 
     @abstractmethod
     def _display_instructions(self):

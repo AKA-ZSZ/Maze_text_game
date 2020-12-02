@@ -8,7 +8,7 @@ maze=Maze()
 @app.route('/', methods=['GET'])
 def default():
     """ homepage """
-    return render_template('index.html',scores=maze.scores)
+    return render_template('index.html',scores=sorted(maze.scores,key=lambda x: (x['score']),reverse=True))
 
 
 
