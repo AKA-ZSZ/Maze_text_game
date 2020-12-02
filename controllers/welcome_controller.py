@@ -14,6 +14,7 @@ class WelcomeController:
         self.grid_size = grid_size
 
     def run(self):
+        """This is the main function that calls function from WelcomeView to display messages"""
         # call functions from WelcomeView to display messages
         self._view.display_message()
         self._view.display_instructions(
@@ -23,6 +24,11 @@ class WelcomeController:
         # user_input=self.get_input()
 
     def get_input(self):
+        """Method to get user input
+
+        Returns:
+            str: key pressed by the user
+        """
         # get user input from KeyboardController
         # return self._keyboard_controller.get_action()
         text_field_width = self._width / 2 - self.grid_size

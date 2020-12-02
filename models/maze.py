@@ -120,6 +120,9 @@ class Maze:
 
 
     def create_wall(self):
+        """Method to place the wall object at a postion that is not "X".
+            Uses the check_position() function to verify the position to place the wall.
+        """
         # bricks = pygame.sprite.Group()
         for height in range(self.col):
             for width in range(self.row):
@@ -136,12 +139,21 @@ class Maze:
     # methods
 
     def create_player(self):
+        """Method to create player
 
+        Returns:
+            (Player): an instance of Player class
+        """
         self._player.rect.x = self.locations.get("P")[1] * GridSize.SIZE
         self._player.rect.y = self.locations.get("P")[0] * GridSize.SIZE
         return self._player
 
     def create_maze_exit(self):
+        """Method to create exit
+
+        Returns:
+            (MazeExit): an instance of MazeExit class
+        """
         self._maze_exit.rect.x = self.locations.get("E")[1] * GridSize.SIZE
         self._maze_exit.rect.y = self.locations.get("E")[0] * GridSize.SIZE
         return self._maze_exit
@@ -195,6 +207,12 @@ class Maze:
         return True
 
     def find_random_spot(self):
+        """Function to generate a random spot until an empty spot on the grid is found.
+            Uses check_position() to check the position generated.
+
+        Returns:
+            (tuple): random empty position generated
+        """
         # generate random numbers
         # 1. if it's not, run again until it's an empty space - while loop
         # use check_position() to check if it's an empty space
@@ -212,12 +230,26 @@ class Maze:
                 return (spot_row, spot_col)
 
     def is_item(self, row, col):
+        """Returns True if the item in the given position is neither a wall nor an empty space,
+            False, otherwise 
+
+        Args:
+            row (int): x-position of the item 
+            col (int): y-position of the item
+        """
         item = self.structure[row][col]
         if item != "X" and item != " ":
             return True
         return False
 
     def move_player(self, x, y):
+        """Method to move the player by x and y spots, change old location of the player to an empty spot,
+            update the movements list and replace the new spot with "P"
+
+        Args:
+            x (int): number of spots on x axis
+            y (int): number of spots on y axis
+        """
         maze_height = len(self.structure)
         maze_width = len(self.structure[0])
 
@@ -254,7 +286,11 @@ class Maze:
         return False
 
     def get_item(self):
+        """Method to pickup items in the maze.
 
+        Returns:
+            (boolean): True if player is at the same location as an item
+        """
         player_current_location = (
             self.locations["P"][0]+self.movements_player[0], self.locations["P"][1]+self.movements_player[1])
         items_not_p_e = ["B", "K", "H", "S", "G"]
@@ -266,6 +302,7 @@ class Maze:
                 return True
 
     def generate_random_spots(self):
+        """Generates 7 random spots to place the items, player and exit."""
         # randomly select 5 spots, player and exit during initialization
         max_spots_len = len(self.items)
         i = 0

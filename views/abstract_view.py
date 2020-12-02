@@ -9,6 +9,7 @@ class AbstractView(ABC):
     """
 
     def display_message(self):
+        """Method to display message"""
         # print(self._display_message())
         self._display_message()
 
