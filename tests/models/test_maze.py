@@ -78,10 +78,10 @@ def test_is_exit(my_maze):
 def test_get_item(my_maze):
     """100A Returns true if the player lands on the same position as an item and makes the value of the item in the locations dictionary to be None.  """
     my_maze._load_all_from_file()
-    my_maze.locations["T"] = (0, 1)
+    my_maze.locations["B"] = (0, 1)
     my_maze.locations["P"] = [0, 2]
     my_maze.move_player(0, -1)
-    assert my_maze.get_item() and my_maze.locations["T"] == None
+    assert my_maze.get_item() and my_maze.locations["B"] == None
 
 
 def test_generate_random_spots(my_maze):
