@@ -99,7 +99,6 @@ class Maze:
     def locations(self):
         return self._locations
 
-
     @property
     def scores(self):
         
@@ -112,12 +111,7 @@ class Maze:
         return new_scores
 
     def add_score(self, score):
-        # if type(score) is not Score:
-        #     raise TypeError("Invalid score.")
-
         self._scores.append(score)
-
-
 
     def create_wall(self):
         """Method to place the wall object at a postion that is not "X".
@@ -132,11 +126,8 @@ class Maze:
                     brick.rect.x = width * GridSize.SIZE
                     brick.rect.y = height * GridSize.SIZE
 
-                    # bricks.add(brick)
                     self._wall.add(brick)
 
-        # return bricks
-    # methods
 
     def create_player(self):
         """Method to create player

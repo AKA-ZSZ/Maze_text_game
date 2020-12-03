@@ -16,12 +16,11 @@ class WelcomeController:
     def run(self):
         """This is the main function that calls function from WelcomeView to display messages"""
         # call functions from WelcomeView to display messages
+        
         self._view.display_message()
         self._view.display_instructions(
             self._width, self._height, self.grid_size)
 
-        # get user input from KeyboardController
-        # user_input=self.get_input()
 
     def get_input(self):
         """Method to get user input
@@ -30,7 +29,7 @@ class WelcomeController:
             str: key pressed by the user
         """
         # get user input from KeyboardController
-        # return self._keyboard_controller.get_action()
+
         text_field_width = self._width / 2 - self.grid_size
         text_field_height = self._height/2 + 50
         start_game = False

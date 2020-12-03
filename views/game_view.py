@@ -88,13 +88,12 @@ class GameView:
         # the time
         self._maze._time_left=float(f"{30 - (pygame.time.get_ticks()/1000):.2f}")
 
-        # move these to view?
+        # display score and remaining time
         self._window.blit(self.create_text_surface(
             f"Score: {self._maze._score}"), (self._maze.row * GridSize.SIZE - GridSize.SIZE * 2, self._maze.col * GridSize.SIZE))
         self._window.blit(self.create_text_surface(
             f"{self._maze._time_left}s"), (0, self._maze.col * GridSize.SIZE))
 
-        # move these to view?
         self._window.blit(self._maze.player.image, self._maze.player.rect)
         self._window.blit(self._maze.maze_exit.image, self._maze.maze_exit.rect)
         self._maze._wall.draw(self._window)

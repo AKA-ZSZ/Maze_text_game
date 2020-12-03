@@ -38,7 +38,6 @@ class GameController:
         """
         user_input = self._keyboard_controller.get_action()
         
-        # if user_input in ("w","a","s","d"):
         if user_input in ("up","left","down","right"):
             self.move_with_input(user_input)
                 
@@ -47,23 +46,6 @@ class GameController:
 
         self._view.display_maze()
 
-        # # call display_maze() to display the maze
-        # self._view.display_maze()
-
-        # while not self._game_over:
-        #     # giving player insturctions of commands
-        #     self._view.display_move_options()
-
-        #     user_input = self._keyboard_controller.get_action()
-
-        #     self.move_with_input(user_input)
-
-        #     # if 'P' reaches the exit, game over condition triggered
-        #     if self._maze.is_exit(self.player_current_location):
-        #         # if self._maze.is_exit(self.maze.movements.player):
-        #         self._game_over = True
-
-        # return self._game_over
 
     def move_with_input(self, user_input):
         """Gets user input from KeyboardController, matches it with the movement dict
