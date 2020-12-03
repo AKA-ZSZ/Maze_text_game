@@ -47,8 +47,6 @@ class Maze:
         self._wall = pygame.sprite.Group()
         self._maze_items = pygame.sprite.Group()
 
-        self._score = 0
-
         self._time_left=30.00 # in seconds
         self._score=0
 
@@ -112,8 +110,6 @@ class Maze:
         return new_scores
 
     def add_score(self, score):
-        # if type(score) is not Score:
-        #     raise TypeError("Invalid score.")
 
         self._scores.append(score)
 
@@ -123,7 +119,7 @@ class Maze:
         """Method to place the wall object at a postion that is not "X".
             Uses the check_position() function to verify the position to place the wall.
         """
-        # bricks = pygame.sprite.Group()
+        
         for height in range(self.col):
             for width in range(self.row):
 
@@ -135,7 +131,6 @@ class Maze:
                     # bricks.add(brick)
                     self._wall.add(brick)
 
-        # return bricks
     # methods
 
     def create_player(self):

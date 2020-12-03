@@ -21,20 +21,7 @@ class GameOverController:
     def run(self):
         """Method to call functions from view to display messages"""
         # call functions from WelcomeView to display messages
-        
         self._view.display_message()
-        # if self.get_user_input()=="q":
-        #     pygame.quit()
-        # running=True
-        # while True:
-        #     for event in pygame.event.get():
-        #         if event.type == pygame.locals.QUIT:
-        #             pygame.quit()
-
-        # while running:
-        #     for event in pygame.event.get():
-        #         if event.type == pygame.locals.QUIT:
-        #             running = False
 
     def get_user_input(self):
         """Method to get user input from keyboard_controller and return it

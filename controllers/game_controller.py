@@ -18,7 +18,6 @@ class GameController:
             window (pygame.Surface): display the pygame surface
         """
         self._maze = maze
-        # self.player = player
         self._game_over = False
         self._view = GameView(maze,window)
         self._keyboard_controller = KeyboardController()

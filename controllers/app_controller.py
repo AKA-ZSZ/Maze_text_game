@@ -39,31 +39,15 @@ class App:
         """
         pygame.init()
         print(self._maze.locations)
-        # window = pygame.display.set_mode(
-        #     (self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + 50))
         clock = pygame.time.Clock()
 
         welcome_controller = WelcomeController(
             self.window, self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + GridSize.SIZE, 50)
-        # welcome_controller = WelcomeController(window)
 
         running = False
 
         welcome_controller.run()
         pygame.display.update()
-
-        # start = False
-
-        # while not start:
-        #     start_key=welcome_controller.get_input()
-        #     start=(len(start_key)>0)
-
-        # while not start:
-        #     key=welcome_controller.get_input()
-        #     if key=="q":
-        #         pygame.quit()
-        #     elif key is not None:
-        #         start=True
 
         welcome_controller.get_input()
 
@@ -82,10 +66,6 @@ class App:
             clock.tick(20)
             self.window.fill((0, 0, 0))
 
-            # for event in pygame.event.get():
-            #     if event.type == pygame.locals.QUIT:
-            #         running = False
-
             game_controller = GameController(self._maze, self._window)
 
             game_controller.run()
@@ -93,37 +73,9 @@ class App:
             if self._maze._time_left <= 0:
                 running = False
 
-            # if pygame.sprite.spritecollide(self._maze.player, self._maze._maze_items, dokill=True):
-            #     self._maze._score += 1
-
-            # # move these to view?
-            # self.window.blit(create_text_surface(
-            #     f"Score: {self._maze._score}"), (self._maze.row * GridSize.SIZE - GridSize.SIZE * 2, self._maze.col * GridSize.SIZE))
-            # self.window.blit(create_text_surface(
-            #     f"{pygame.time.get_ticks()} ms"), (0, self._maze.col * GridSize.SIZE))
-
-            # # move these to view?
-            # self.window.blit(self._maze.player.image, self._maze.player.rect)
-            # self.window.blit(self._maze.maze_exit.image, self._maze.maze_exit.rect)
-            # self._maze._wall.draw(self.window)
-            # self._maze._maze_items.draw(self.window)
-
             if pygame.sprite.collide_rect(self._maze.player, self._maze.maze_exit):
-                # game over controller will be in here
-                # game_over_controller = GameOverController(self.window, self._maze)
-                # game_over_controller.run()
-
                 running = False
 
-            #
-
-            # if result:
-            #     running = False
-
-        # result can be win or loss
-
-        # game_over_controller = GameOverController(self.window, self._maze)
-        # game_over_controller.run()
 
         # game over controller will be in here
         game_over_controller = GameOverController(self.window, self._maze)
@@ -139,11 +91,3 @@ class App:
                 pygame.quit()
 
 
-# better to put this somewhere else
-
-
-# def create_text_surface(text):
-#     openSans = pygame.font.SysFont('open sans', 24)
-#     text_surface = openSans.render(text, True, (160, 0, 0))
-
-#     return text_surface
