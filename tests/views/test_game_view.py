@@ -2,6 +2,7 @@ from views.game_view import GameView
 from models.maze import Maze
 
 import pytest
+import pygame
 
 
 @pytest.fixture
@@ -9,7 +10,9 @@ def game_view_instance():
     maze = Maze()
     maze._load_all_from_file()
     maze.generate_random_spots()
-    view = GameView(maze)
+    window = pygame.display.set_mode(
+        (1000, 1000))
+    view = GameView(maze, window)
     return view
 
 
@@ -19,16 +22,16 @@ def test_class_definition(game_view_instance):
 
 
 def test_init_argument():
-    """ 020A test if constructor recieves one argument """
+    """ 020A test if constructor recieves two argument """
     with pytest.raises(TypeError):
         maze = GameView()
     with pytest.raises(TypeError):
-        maze = GameView([],"as")
+        maze = GameView([], "as", "as")
 
 
 def test_init_maze(game_view_instance):
     """ 020B test for type of maze"""
-    assert isinstance(game_view_instance._maze,object)
+    assert isinstance(game_view_instance._maze, object)
 
 
 def test_display_maze(game_view_instance):
@@ -45,5 +48,6 @@ def test_display_move_options(game_view_instance):
 
 def test_get_items(game_view_instance):
     """ 050A test for displaying player's backpack"""
-    assert "You have:" in game_view_instance._get_items(["M", "T", "R", "S", "G"])
+    assert "You have:" in game_view_instance._get_items(
+        ["M", "T", "R", "S", "G"])
     assert "M", "T" in game_view_instance._get_items(["M", "T", "R", "S", "G"])
