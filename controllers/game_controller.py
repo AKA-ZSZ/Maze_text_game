@@ -19,9 +19,9 @@ class GameController:
         """
         self._maze = maze
         self._game_over = False
-        self._view = GameView(maze,window)
+        self._view = GameView(maze, window)
         self._keyboard_controller = KeyboardController()
-        
+
     @property
     def player_current_location(self):
         """Getter for player's current location
@@ -36,12 +36,12 @@ class GameController:
             The pygame window closes when user presses 'q'.
         """
         user_input = self._keyboard_controller.get_action()
-        
+
         # if user_input in ("w","a","s","d"):
-        if user_input in ("up","left","down","right"):
+        if user_input in ("up", "left", "down", "right"):
             self.move_with_input(user_input)
-                
-        elif user_input=="q":
+
+        elif user_input == "q":
             pygame.quit()
 
         self._view.display_maze()

@@ -28,12 +28,14 @@ class WelcomeView(AbstractView):
         self._window.blit(msg_text, (155, 180))
 
     def _display_instructions(self, width, height, grid_size):
-        """Template method: display the game start instructions
+        """ Template method: display the game start instructions
 
-        Returns:
-            str: instruction message
+        Args:
+            width (int): width of pygame window
+            height (int): height of pygame window
+            grid_size (int): grid size of pygame window
         """
-        
+
         size_controller = grid_size
         print(size_controller)
         rectangle_surface = pygame.Surface((200, 200))

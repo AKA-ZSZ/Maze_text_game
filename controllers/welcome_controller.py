@@ -20,12 +20,11 @@ class WelcomeController:
         self._view.display_instructions(
             self._width, self._height, self.grid_size)
 
-
     def get_input(self):
-        """Method to get user input
+        """ Get mouse position input from the player
+            If player click "start" the game start,
+            else if player clicks "quit" the game exits
 
-        Returns:
-            str: key pressed by the user
         """
 
         text_field_width = self._width / 2 - self.grid_size

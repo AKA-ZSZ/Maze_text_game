@@ -76,7 +76,6 @@ class App:
             if pygame.sprite.collide_rect(self._maze.player, self._maze.maze_exit):
                 running = False
 
-
         # game over controller will be in here
         game_over_controller = GameOverController(self.window, self._maze)
         game_over_controller.run()
@@ -89,5 +88,3 @@ class App:
             key = game_over_controller.get_user_input()
             if key == "q":
                 pygame.quit()
-
-

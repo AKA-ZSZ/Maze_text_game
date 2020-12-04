@@ -1,6 +1,7 @@
 import pygame
 from models.grid_size import GridSize
 
+
 class GameView:
     """ Displays the maze, move options and the player items
     """
@@ -18,7 +19,7 @@ class GameView:
             raise TypeError("Maze must be object")
 
         self._maze = maze
-        self._window= window
+        self._window = window
         self._window.fill((0, 0, 0))
 
         pygame.font.init()
@@ -37,7 +38,7 @@ class GameView:
         """ Public: prints maze text
         """
 
-        print(self._display_maze()) # print text version to terminal
+        print(self._display_maze())  # print text version to terminal
 
     def get_items(self, items):
         """ Public: prints item in backpack
@@ -61,7 +62,7 @@ class GameView:
         """
         return "type w,a,s,d to move the player: "
 
-    def create_text_surface(self,text):
+    def create_text_surface(self, text):
         openSans = pygame.font.SysFont('open sans', 24)
         text_surface = openSans.render(text, True, (160, 0, 0))
 
@@ -80,25 +81,23 @@ class GameView:
             text += ("").join(line)
             text += "\n"
 
-
         # pygame version
         if pygame.sprite.spritecollide(self._maze.player, self._maze._maze_items, dokill=True):
             self._maze._score += 1
 
         # the time
-        self._maze._time_left=float(f"{30 - (pygame.time.get_ticks()/1000):.2f}")
+        self._maze._time_left = float(
+            f"{30 - (pygame.time.get_ticks()/1000):.2f}")
 
-        
         self._window.blit(self.create_text_surface(
             f"Score: {self._maze._score}"), (self._maze.row * GridSize.SIZE - GridSize.SIZE * 2, self._maze.col * GridSize.SIZE))
         self._window.blit(self.create_text_surface(
             f"{self._maze._time_left}s"), (0, self._maze.col * GridSize.SIZE))
 
-        
         self._window.blit(self._maze.player.image, self._maze.player.rect)
-        self._window.blit(self._maze.maze_exit.image, self._maze.maze_exit.rect)
+        self._window.blit(self._maze.maze_exit.image,
+                          self._maze.maze_exit.rect)
         self._maze._wall.draw(self._window)
         self._maze._maze_items.draw(self._window)
-        
 
         return text

@@ -56,47 +56,99 @@ class Maze:
 
     @property
     def row(self):
+        """ Get length of maze_text row
+
+        Returns:
+            int : len(self._structure[0])
+        """
         return len(self._structure[0])
 
     @property
     def col(self):
+        """ Get length of maze_text column
+
+        Returns:
+            int: len(self._structure)
+        """
         return len(self._structure)
 
     @property
     def maze_exit(self):
+        """ Get maze exit object
+
+        Returns:
+            object: self._maze_exit
+        """
         return self._maze_exit
 
     @property
     def player(self):
+        """ Get player object
+
+        Returns:
+            object: self._player
+        """
         return self._player
 
     @property
     def structure(self):
-        # maze data getter
+        """ Get structure nested list
+
+        Returns:
+            list: self._structure
+        """
         return self._structure
 
     @structure.setter
     def structure(self, structure):
+        """ Set structure nested list
+
+        Returns:
+            None
+        """
         self._structure = structure
 
     @property
     def movements_player(self):
+        """ Get player movements, i.e. how many times
+            player moved since the game started
+
+        Returns:
+            list: self._movements_player
+        """
         return self._movements_player
 
     @movements_player.setter
     def movements_player(self, movements_player):
+        """ Set player movements
+        """
         self._movements_player = movements_player
 
     @property
     def items(self):
+        """ Get list of items in maze
+
+        Returns:
+            list: self._items
+        """
         return self._items
 
     @property
     def locations(self):
+        """ Get location of each item in maze
+
+        Returns:
+            dictionary: self._locations
+        """
         return self._locations
 
     @property
     def scores(self):
+        """ Get player scores
+
+        Returns:
+            list: new_scores
+        """
 
         new_scores = []
         for score in sorted(self._scores, reverse=True):
@@ -107,6 +159,11 @@ class Maze:
         return new_scores
 
     def add_score(self, score):
+        """ Add score to score list
+
+        Args:
+            score (dict): player score
+        """
 
         self._scores.append(score)
 
