@@ -51,9 +51,9 @@ class WelcomeView(AbstractView):
         start = "Start"
         start_surface = self._arial.render(start, True, (0, 0, 0))
         self._window.blit(
-            start_surface, (width/2 - size_controller/2, height/2))
+            start_surface, (width/2 - size_controller*0.7, height/2))
 
         game_quit = "Quit"
         start_surface = self._arial.render(game_quit, True, (0, 0, 0))
         self._window.blit(
-            start_surface, (width/2 - size_controller/2, height/2 + 50))
+            start_surface, (width/2 - size_controller*0.7, height/2 + 50))
