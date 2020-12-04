@@ -60,7 +60,7 @@ class GameView:
         Returns:
             str: move options text
         """
-        return "Use ↑,↓,←,→ to move the player: "
+        return "Use w,a,s,d to move the player: "
 
     def create_text_surface(self, text):
         openSans = pygame.font.SysFont('open sans', 24)
