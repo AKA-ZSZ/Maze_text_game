@@ -96,3 +96,52 @@ def test_generate_random_spots(my_maze):
     # since there are 7 items to be placed in total
     assert len(locations_list) == 7
     print(locations_list)
+
+
+class FakeResponse:
+
+    def __init__(self, status_code=200):
+        self._status_code = status_code
+
+    @property
+    def status_code(self):
+        return self._status_code
+
+    @staticmethod
+    def json():
+        return {"scores": [{"name": "Foo", "score": 999}]}
+
+
+def test_add_name_score(monkeypatch, my_maze):
+    """ 120A Test if api return correct status code 
+
+        200: True, Otherwise False    
+    """
+    def mock_put(*args, **kargs):
+        return FakeResponse(204)
+
+    monkeypatch.setattr("requests.put", mock_put)
+
+    with patch("builtins.input", side_effect=["Tim"]):
+        r = my_maze.add_name_score()
+        assert r == True
+
+    def bad_mock_put(*args, **kargs):
+        return FakeResponse(400)
+
+    monkeypatch.setattr("requests.put", bad_mock_put)
+
+    with patch("builtins.input", side_effect=["Tim"]):
+        r = my_maze.add_name_score()
+        assert r == False
+
+
+def test_print_scores(monkeypatch, my_maze):
+    """ 130A Test of api returns correct JSON response"""
+    def mock_get(*args, **kargs):
+        return FakeResponse()
+
+    monkeypatch.setattr("requests.get", mock_get)
+
+    r = my_maze.print_scores()
+    assert r == {"scores": [{"name": "Foo", "score": 999}]}

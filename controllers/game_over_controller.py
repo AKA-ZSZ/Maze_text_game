@@ -21,9 +21,7 @@ class GameOverController:
     def run(self):
         """Method to call functions from view to display messages"""
         # call functions from WelcomeView to display messages
-        
         self._view.display_message()
-
 
     def get_user_input(self):
         """Method to get user input from keyboard_controller and return it

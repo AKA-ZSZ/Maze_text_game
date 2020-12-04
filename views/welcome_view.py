@@ -20,7 +20,6 @@ class WelcomeView(AbstractView):
         Returns:
             str: welcome message
         """
-        # return "Welcome to our maze game!!"
 
         msg = "Welcome to our maze game!!"
         msg_surface = self._arial.render(msg, True, (0, 0, 0))
@@ -29,14 +28,16 @@ class WelcomeView(AbstractView):
         self._window.blit(msg_text, (155, 180))
 
     def _display_instructions(self, width, height, grid_size):
-        """Template method: display the game start instructions
+        """ Template method: display the game start instructions
 
-        Returns:
-            str: instruction message
+        Args:
+            width (int): width of pygame window
+            height (int): height of pygame window
+            grid_size (int): grid size of pygame window
         """
+        
         # return "Press any key to start the game"
         # instruction="Press any key to start the game"
-        
         size_controller = grid_size
         print(size_controller)
         rectangle_surface = pygame.Surface((200, 200))

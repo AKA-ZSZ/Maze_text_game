@@ -40,7 +40,6 @@ class App:
         pygame.init()
         
         print(self._maze.locations)
-
         clock = pygame.time.Clock()
 
         welcome_controller = WelcomeController(

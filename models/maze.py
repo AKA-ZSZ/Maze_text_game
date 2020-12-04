@@ -47,77 +47,131 @@ class Maze:
         self._wall = pygame.sprite.Group()
         self._maze_items = pygame.sprite.Group()
 
+        self._time_left = 30.00  # in seconds
         self._score = 0
 
-        self._time_left=30.00 # in seconds
-        self._score=0
-
-
         # flask
-        self._API_URL= "http://localhost:5000/api"
+        self._API_URL = "http://localhost:5000/api"
         self._scores = list()
-
 
     @property
     def row(self):
+        """ Get length of maze_text row
+
+        Returns:
+            int : len(self._structure[0])
+        """
         return len(self._structure[0])
 
     @property
     def col(self):
+        """ Get length of maze_text column
+
+        Returns:
+            int: len(self._structure)
+        """
         return len(self._structure)
 
     @property
     def maze_exit(self):
+        """ Get maze exit object
+
+        Returns:
+            object: self._maze_exit
+        """
         return self._maze_exit
 
     @property
     def player(self):
+        """ Get player object
+
+        Returns:
+            object: self._player
+        """
         return self._player
 
     @property
     def structure(self):
-        # maze data getter
+        """ Get structure nested list
+
+        Returns:
+            list: self._structure
+        """
         return self._structure
 
     @structure.setter
     def structure(self, structure):
+        """ Set structure nested list
+
+        Returns:
+            None
+        """
         self._structure = structure
 
     @property
     def movements_player(self):
+        """ Get player movements, i.e. how many times
+            player moved since the game started
+
+        Returns:
+            list: self._movements_player
+        """
         return self._movements_player
 
     @movements_player.setter
     def movements_player(self, movements_player):
+        """ Set player movements
+        """
         self._movements_player = movements_player
 
     @property
     def items(self):
+        """ Get list of items in maze
+
+        Returns:
+            list: self._items
+        """
         return self._items
 
     @property
     def locations(self):
+        """ Get location of each item in maze
+
+        Returns:
+            dictionary: self._locations
+        """
         return self._locations
 
     @property
     def scores(self):
-        
-        new_scores=[]
-        for score in sorted(self._scores,reverse=True):
-            new_dict=dict()
-            new_dict["name"]=score[0]
-            new_dict["score"]=score[1]
+        """ Get player scores
+
+        Returns:
+            list: new_scores
+        """
+
+        new_scores = []
+        for score in sorted(self._scores, reverse=True):
+            new_dict = dict()
+            new_dict["name"] = score[0]
+            new_dict["score"] = score[1]
             new_scores.append(new_dict)
         return new_scores
 
     def add_score(self, score):
+        """ Add score to score list
+
+        Args:
+            score (dict): player score
+        """
+
         self._scores.append(score)
 
     def create_wall(self):
         """Method to place the wall object at a postion that is not "X".
             Uses the check_position() function to verify the position to place the wall.
         """
-        # bricks = pygame.sprite.Group()
+
         for height in range(self.col):
             for width in range(self.row):
 
@@ -128,6 +182,7 @@ class Maze:
 
                     self._wall.add(brick)
 
+    # methods
 
     def create_player(self):
         """Method to create player
@@ -310,14 +365,20 @@ class Maze:
 
                     i += 1
 
-    #calculate the final score when user wins
+    # calculate the final score when user wins
     def cal_final_score(self):
         return float("{:.2f}".format(self._time_left*self._score))
 
-    #ask winner for name in console and send a request
+    # ask winner for name in console and send a request
     def add_name_score(self):
-        winner_name=input('Please enter your name:')
-        req=requests.put(f"{self._API_URL}/new", json={"name": winner_name, "score": self.cal_final_score()})
+        winner_name = input('Please enter your name:')
+        req = requests.put(
+            f"{self._API_URL}/new", json={"name": winner_name, "score": self.cal_final_score()})
+
+        if req.status_code == 204:
+            return True
+
+        return False
 
     # print all scores on {self._API_URL}/list
     def print_scores(self):
@@ -326,7 +387,4 @@ class Maze:
             [f"{score['name']}: {score['score']}" for score in data["scores"]]
         )
         print(output)
-
-    
-
-
+        return data
