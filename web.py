@@ -5,17 +5,17 @@ from flask import Flask,request,render_template
 app = Flask(__name__)
 maze=Maze()
 
+""" homepage """
 @app.route('/', methods=['GET'])
 def default():
-    """ homepage """
     return render_template('index.html',scores=sorted(maze.scores,key=lambda x: (x['score']),reverse=True))
 
-
-
+""" Display the database storing the winners' scores """
 @app.route('/api/list')
 def list_all_scores():
     return {"scores": maze.scores}
 
+""" Add the winners' scores into database """
 @app.route('/api/new', methods=["PUT"])
 def add_new_score():
     data = request.get_json()
