@@ -43,7 +43,7 @@ class App:
         clock = pygame.time.Clock()
 
         welcome_controller = WelcomeController(
-            self.window, self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + GridSize.SIZE, 50)
+            self.window, self._maze.row * GridSize.SIZE, self._maze.col * GridSize.SIZE + GridSize.SIZE, GridSize.SIZE)
 
         running = False
 

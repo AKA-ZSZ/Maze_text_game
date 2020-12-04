@@ -36,8 +36,6 @@ class WelcomeView(AbstractView):
             grid_size (int): grid size of pygame window
         """
         
-        # return "Press any key to start the game"
-        # instruction="Press any key to start the game"
         size_controller = grid_size
         print(size_controller)
         rectangle_surface = pygame.Surface((200, 200))
@@ -49,6 +47,7 @@ class WelcomeView(AbstractView):
         self._window.blit(rectangle_surface.convert(),
                           (width/2 - size_controller, height/2))
 
+        # creating fake buttons
         start = "Start"
         start_surface = self._arial.render(start, True, (0, 0, 0))
         self._window.blit(

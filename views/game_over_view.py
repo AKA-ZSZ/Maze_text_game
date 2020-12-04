@@ -48,7 +48,6 @@ class GameOverView(AbstractView):
 
         msg_surface = self._arial.render(msg, True, (0, 0, 0))
         msg_text = msg_surface.convert_alpha()
-#
         msg_s = self._arial.render(msg_instruction, True, (0, 0, 0))
         msg_t = msg_s.convert_alpha()
         self._window.blit(msg_text, (155, 180))

@@ -15,8 +15,7 @@ class WelcomeController:
 
     def run(self):
         """This is the main function that calls function from WelcomeView to display messages"""
-        # call functions from WelcomeView to display messages
-        
+
         self._view.display_message()
         self._view.display_instructions(
             self._width, self._height, self.grid_size)
@@ -33,6 +32,7 @@ class WelcomeController:
         start_game = False
         while not start_game:
             for event in pygame.event.get():
+                # ask player either to start or quit the game by clicking on button
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if (text_field_width) < pygame.mouse.get_pos()[0] < (text_field_width + 100) and (text_field_height) < pygame.mouse.get_pos()[1] < (text_field_height + 30):
                         print("Quit the game")

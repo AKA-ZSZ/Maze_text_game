@@ -22,7 +22,10 @@ class Maze:
             _locations (dict): The initial locatios of items
             _movements_player (list(int)): The total movements of the player in row and column before the end of game
             _player (Player): an instance of Player class
-
+            _time_left (float): The remaining time of the maze game
+            _score (int): The number of picked items
+            _API_URL (str): The Flask API url (const)
+            _scores (list(int)): a list containing all winners' high scores
         """
 
         self._structure = [[""]]

@@ -8,7 +8,7 @@ import pygame
 class GameController:
     '''Call functions from GameView to display the maze. 
        Call functions from Maze to get position of player, items, and exit
-       Set up how player will move based on "w,a,s,d" command'''
+       Set up how player will move based on "↑,↓,←,→" command'''
 
     def __init__(self, maze, window):
         """Constructor for GameController class
@@ -32,12 +32,11 @@ class GameController:
         return (self._maze.locations["P"][0]+self._maze.movements_player[0], self._maze.locations["P"][1]+self._maze.movements_player[1])
 
     def run(self):
-        """This is the main function that calls the methods that control the game based on user's input (w,a,s,d,q)
+        """This is the main function that calls the methods that control the game based on user's input (↑,↓,←,→,q)
             The pygame window closes when user presses 'q'.
         """
         user_input = self._keyboard_controller.get_action()
 
-        # if user_input in ("w","a","s","d"):
         if user_input in ("up", "left", "down", "right"):
             self.move_with_input(user_input)
 

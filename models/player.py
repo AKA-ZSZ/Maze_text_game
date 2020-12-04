@@ -31,7 +31,6 @@ class Player(pygame.sprite.Sprite):
         if type(backpack) != list:
             raise TypeError
 
-        # [item1,item2...]
         self._backpack = backpack
 
     @property
