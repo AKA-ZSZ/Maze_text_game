@@ -70,9 +70,11 @@ class App:
 
             game_controller.run()
 
+            # check if time runs out
             if self._maze._time_left <= 0:
                 running = False
 
+            # check if player reaches the exit
             if pygame.sprite.collide_rect(self._maze.player, self._maze.maze_exit):
                 running = False
 
@@ -80,6 +82,7 @@ class App:
         game_over_controller.run()
         pygame.display.update()
 
+        # ask for player name
         if game_over_controller._maze_result:
             self._maze.add_name_score()
 
