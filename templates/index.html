@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Homepage</title>
+</head>
+
+<body><br>
+    <h1 class="text-center">Leaderboard</h1><br>
+
+    {% if scores |length >0 %}
+
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in scores %}
+            <tr class="table-warning">
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ item["name"] }}</td>
+                <td>{{ item["score"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+
+    <p>The leaderboard is empty now.</p>
+
+    {% endif %}
+
+</body>
+
+</html>
